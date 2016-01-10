@@ -1,4 +1,4 @@
-package com.ricardonavarrom.mercury;
+package com.ricardonavarrom.mercury.api.model;
 
 public class EchoNestArtist {
 

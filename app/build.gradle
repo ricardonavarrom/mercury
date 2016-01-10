@@ -10,6 +10,10 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+
+        buildConfigField 'String', 'ECHONEST_API_KEY', '"RLYRTQDYNZ3W8VMUF"'
+        buildConfigField 'String', "ECHONEST_API_URL", '"http://developer.echonest.com/api/v4/"'
+        buildConfigField 'String', "SPOTIFY_API_URL", '"http://api.spotify.com/"'
     }
     buildTypes {
         release {
@@ -24,6 +28,8 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.0'
     compile 'com.android.support:design:23.1.0'
-    compile 'com.squareup.retrofit:retrofit:2.0.0-beta2'
-    compile 'com.squareup.retrofit:converter-gson:2.0.0-beta2'
+    compile 'com.squareup.okhttp:okhttp:2.6.0'
+    compile 'com.squareup.okhttp:logging-interceptor:2.6.0'
+    compile project(':presentation')
+    compile project(':api')
 }
