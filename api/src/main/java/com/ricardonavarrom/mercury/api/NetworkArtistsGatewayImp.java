@@ -1,7 +1,9 @@
 package com.ricardonavarrom.mercury.api;
 
 import com.ricardonavarrom.mercury.api.mapper.ApiMapper;
-import com.ricardonavarrom.mercury.api.model.EchoNestResponse;
+import com.ricardonavarrom.mercury.api.model.EchonestArtist;
+import com.ricardonavarrom.mercury.api.model.EchonestResponse;
+import com.ricardonavarrom.mercury.api.model.SpotifyArtistsList;
 import com.ricardonavarrom.mercury.domain.model.Artist;
 import com.ricardonavarrom.mercury.domain.model.NetworkArtistsGateway;
 
@@ -11,48 +13,52 @@ import java.util.List;
 
 public class NetworkArtistsGatewayImp implements NetworkArtistsGateway {
 
-  private final EchoNestApiClient apiClient;
-  private final String apiKey;
-  private final ApiMapper apiMapper = new ApiMapper();
+    private final EchonestApiClient echoNestApiClient;
+    private final String echonestApiKey;
+    private final SpotifyApiClient spotifyApiClient;
+    private final ApiMapper apiMapper;
 
-  public NetworkArtistsGatewayImp(EchoNestApiClient apiClient, String apiKey) {
-    this.apiClient = apiClient;
-    this.apiKey = apiKey;
-  }
-
-  @Override public List<Artist> getArtistsRanking() {
-    try {
-      EchoNestResponse echoNestResponse =
-              apiClient.getSpotifyArtistsRanking(apiKey, "json", 10, "hotttnesss-desc")
-                      .execute().body();
-
-      return apiMapper.mapArtists(echoNestResponse);
-    } catch (IOException e) {
-      e.printStackTrace();
-      return new ArrayList<>();
+    public NetworkArtistsGatewayImp(EchonestApiClient echonestApiClient, String echonestApiKey,
+                                  SpotifyApiClient spotifyApiClient) {
+        this.echoNestApiClient = echonestApiClient;
+        this.echonestApiKey = echonestApiKey;
+        this.spotifyApiClient = spotifyApiClient;
+        apiMapper = new ApiMapper();
     }
-  }
 
+    @Override public List<Artist> getTop10ArtistsRanking() {
+        try {
+            EchonestResponse echonestResponse =
+                  echoNestApiClient.getArtistsRanking(echonestApiKey, "json", 10, "hotttnesss-desc")
+                          .execute().body();
+            List<EchonestArtist> echonestArtists = echonestResponse.getArtists().getItems();
 
-//    private final SpotifyApiClient apiClient;
-//    private final String apiKey;
-//    private final ApiMapper apiMapper = new ApiMapper();
-//
-//    public NetworkArtistsGatewayImp(SpotifyApiClient apiClient, String apiKey) {
-//        this.apiClient = apiClient;
-//        this.apiKey = apiKey;
-//    }
-//
-//    @Override public List<Artist> getArtistsRanking() {
-//
-//        try {
-//            SpotifyArtistsList spotifyArtistsList =
-//                    apiClient.getArtists().execute().body();
-//
-//            return apiMapper.mapSpotifyArtists(spotifyArtistsList);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            return new ArrayList<>();
-//        }
-//    }
+            String spotifyArtistIdsString =
+                    this.getSpotifyArtistIdsStringFromEchonestArtists(echonestArtists);
+            SpotifyArtistsList spotifyArtistsList =
+                    spotifyApiClient.getSeveralArtists(spotifyArtistIdsString).execute().body();
+
+            return apiMapper.mapSpotifyArtists(spotifyArtistsList);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    private String getSpotifyArtistIdsStringFromEchonestArtists(
+            List<EchonestArtist> echonestArtists) {
+
+        String spotifyArtistIdsString = "";
+
+        for (EchonestArtist echonestArtist : echonestArtists) {
+            String spotifyId = echonestArtist.getForeignIds().get(0).getForeignId();
+            spotifyId = spotifyId.replace("spotify:artist:", "");
+
+            spotifyArtistIdsString = spotifyArtistIdsString == ""
+                    ? spotifyId
+                    : spotifyArtistIdsString + "," + spotifyId;
+        }
+
+        return spotifyArtistIdsString;
+    }
 }

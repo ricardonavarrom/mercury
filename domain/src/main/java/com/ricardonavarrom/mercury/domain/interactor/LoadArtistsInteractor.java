@@ -29,7 +29,7 @@ public class LoadArtistsInteractor implements Interactor {
     }
 
     private void loadArtists() {
-        List<Artist> artistsList = networkArtistsGateway.getArtistsRanking();
+        List<Artist> artistsList = networkArtistsGateway.getTop10ArtistsRanking();
         output.onArtistsLoaded(artistsList);
 
     }

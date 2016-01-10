@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface NetworkArtistsGateway {
 
-  List<Artist> getArtistsRanking();
+  List<Artist> getTop10ArtistsRanking();
 }

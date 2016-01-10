@@ -4,12 +4,12 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class EchoNestArtistsList {
+public class EchonestArtistsList {
 
     @SerializedName("artists")
-    private List<EchoNestArtist> items;
+    private List<EchonestArtist> items;
 
-    public List<EchoNestArtist> getItems() {
+    public List<EchonestArtist> getItems() {
         return items;
     }
 }

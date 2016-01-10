@@ -2,12 +2,12 @@ package com.ricardonavarrom.mercury.api.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class EchoNestResponse {
+public class EchonestResponse {
 
     @SerializedName("response")
-    private EchoNestArtistsList artists;
+    private EchonestArtistsList artists;
 
-    public EchoNestArtistsList getArtists() {
+    public EchonestArtistsList getArtists() {
         return artists;
     }
 }
