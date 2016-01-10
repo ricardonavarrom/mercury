@@ -3,7 +3,6 @@ package com.ricardonavarrom.mercury.domain.interactor;
 import com.ricardonavarrom.mercury.domain.model.Artist;
 import com.ricardonavarrom.mercury.domain.model.NetworkArtistsGateway;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class LoadArtistsInteractor implements Interactor {
@@ -30,26 +29,9 @@ public class LoadArtistsInteractor implements Interactor {
     }
 
     private void loadArtists() {
-//        List<Artist> artistsList = createArrayList();
         List<Artist> artistsList = networkArtistsGateway.getArtistsRanking();
         output.onArtistsLoaded(artistsList);
 
-    }
-
-    private List<Artist> createArrayList() {
-
-        return Arrays.asList(
-                new Artist.Builder().id("1").name("Coldplay").build(),
-                new Artist.Builder().id("1").name("Coldplay").build(),
-                new Artist.Builder().id("1").name("Coldplay").build(),
-                new Artist.Builder().id("1").name("Coldplay").build(),
-                new Artist.Builder().id("1").name("Coldplay").build(),
-                new Artist.Builder().id("1").name("Coldplay").build(),
-                new Artist.Builder().id("1").name("Coldplay").build(),
-                new Artist.Builder().id("1").name("Coldplay").build(),
-                new Artist.Builder().id("1").name("Coldplay").build(),
-                new Artist.Builder().id("1").name("Coldplay").build()
-        );
     }
 
     public interface LoadArtistsInteractorOutput {
