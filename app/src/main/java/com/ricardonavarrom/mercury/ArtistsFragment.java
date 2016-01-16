@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.ricardonavarrom.mercury.dependencies.PresenterFactory;
@@ -17,10 +18,14 @@ import com.ricardonavarrom.mercury.presentation.view.ArtistsView;
 
 import java.util.List;
 
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
+
 public class ArtistsFragment extends Fragment implements ArtistsView {
 
     private ListView listView;
     private ArtistsPresenter presenter;
+    private ProgressBar progressBar;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -32,6 +37,7 @@ public class ArtistsFragment extends Fragment implements ArtistsView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        progressBar = (ProgressBar) rootView.findViewById(R.id.artists_progress_bar);
         listView = (ListView) rootView.findViewById(R.id.artists_listview);
 
         return rootView;
@@ -51,6 +57,16 @@ public class ArtistsFragment extends Fragment implements ArtistsView {
                         R.id.item_artists_textview,
                         artists)
         );
+    }
+
+    @Override
+    public void showLoading() {
+        progressBar.setVisibility(VISIBLE);
+    }
+
+    @Override
+    public void hideLoading() {
+        progressBar.setVisibility(GONE);
     }
 
     @Override

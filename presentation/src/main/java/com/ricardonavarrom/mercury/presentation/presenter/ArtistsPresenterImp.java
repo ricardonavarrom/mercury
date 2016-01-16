@@ -26,6 +26,7 @@ public class ArtistsPresenterImp implements ArtistsPresenter, LoadArtistsInterac
 
     @Override
     public void onResume() {
+        view.showLoading();
         interactor.setOutput(this);
         interactorExecutor.execute(interactor);
         view = viewInjector.inject(view);
@@ -33,6 +34,7 @@ public class ArtistsPresenterImp implements ArtistsPresenter, LoadArtistsInterac
 
     @Override
     public void onArtistsLoaded(List<Artist> artists) {
+        view.hideLoading();
         if (view != null) {
             view.setArtists(artists);
         }
