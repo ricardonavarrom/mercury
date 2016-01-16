@@ -13,7 +13,7 @@ public class ApiMapper {
         if (spotifyArtistsList != null) {
             List<SpotifyArtist> items = spotifyArtistsList.getItems();
             for (int i = 0; i < items.size(); i++) {
-                list.add(mapSpotifyArtist(i, i, items.get(i)));
+                list.add(mapSpotifyArtist(i+1, i+1, items.get(i)));
             }
         }
         return list;

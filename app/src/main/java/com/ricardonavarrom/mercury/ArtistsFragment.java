@@ -25,7 +25,7 @@ public class ArtistsFragment extends Fragment implements ArtistsView {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = PresenterFactory.makeArtistsPresenter(this);
+        presenter = PresenterFactory.makeArtistsPresenter(getActivity(), this);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.ricardonavarrom.mercury.dependencies;
 
+import android.content.Context;
 import android.os.Handler;
 
 import com.ricardonavarrom.mercury.presentation.InteractorExecutor;
@@ -18,8 +19,8 @@ public class PresenterFactory {
 
     public static final int THREADS = 3;
 
-    public static ArtistsPresenter makeArtistsPresenter(ArtistsView view) {
-        return new ArtistsPresenterImp(view, InteractorFactory.makeLoadArtistsInteractor(),
+    public static ArtistsPresenter makeArtistsPresenter(Context context, ArtistsView view) {
+        return new ArtistsPresenterImp(view, InteractorFactory.makeLoadArtistsInteractor(context),
                 makeInteractorExecutor(), makeViewInjector());
     }
 

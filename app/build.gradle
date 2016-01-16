@@ -32,4 +32,5 @@ dependencies {
     compile 'com.squareup.okhttp:logging-interceptor:2.6.0'
     compile project(':presentation')
     compile project(':api')
+    compile project(':persistence')
 }

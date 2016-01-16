@@ -1,10 +1,14 @@
 package com.ricardonavarrom.mercury.dependencies;
 
+import android.content.Context;
+
 import com.ricardonavarrom.mercury.BuildConfig;
 import com.ricardonavarrom.mercury.api.EchonestApiClient;
 import com.ricardonavarrom.mercury.api.NetworkArtistsGatewayImp;
 import com.ricardonavarrom.mercury.api.SpotifyApiClient;
-import com.ricardonavarrom.mercury.domain.model.NetworkArtistsGateway;
+import com.ricardonavarrom.mercury.domain.LocalArtistsGateway;
+import com.ricardonavarrom.mercury.domain.NetworkArtistsGateway;
+import com.ricardonavarrom.mercury.persistence.LocalArtistGatewayImp;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.logging.HttpLoggingInterceptor;
 
@@ -12,6 +16,10 @@ import retrofit.GsonConverterFactory;
 import retrofit.Retrofit;
 
 public class GatewaysFactory {
+
+    public static LocalArtistsGateway makeLocalArtistsGateway(Context context) {
+        return new LocalArtistGatewayImp(context);
+    }
 
     public static NetworkArtistsGateway makeNetworkArtistsGateway() {
         return new NetworkArtistsGatewayImp(makeEchonestApiClient(makeHttpClient()),

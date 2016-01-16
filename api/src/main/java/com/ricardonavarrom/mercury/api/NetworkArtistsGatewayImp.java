@@ -5,7 +5,7 @@ import com.ricardonavarrom.mercury.api.model.EchonestArtist;
 import com.ricardonavarrom.mercury.api.model.EchonestResponse;
 import com.ricardonavarrom.mercury.api.model.SpotifyArtistsList;
 import com.ricardonavarrom.mercury.domain.model.Artist;
-import com.ricardonavarrom.mercury.domain.model.NetworkArtistsGateway;
+import com.ricardonavarrom.mercury.domain.NetworkArtistsGateway;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ public class NetworkArtistsGatewayImp implements NetworkArtistsGateway {
         apiMapper = new ApiMapper();
     }
 
-    @Override public List<Artist> getTop10ArtistsRanking() {
+    @Override public List<Artist> load() {
         try {
             EchonestResponse echonestResponse =
                   echoNestApiClient.getArtistsRanking(echonestApiKey, "json", 10, "hotttnesss-desc")

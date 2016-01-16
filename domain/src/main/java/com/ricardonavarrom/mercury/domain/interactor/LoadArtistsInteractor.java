@@ -1,16 +1,20 @@
 package com.ricardonavarrom.mercury.domain.interactor;
 
+import com.ricardonavarrom.mercury.domain.LocalArtistsGateway;
 import com.ricardonavarrom.mercury.domain.model.Artist;
-import com.ricardonavarrom.mercury.domain.model.NetworkArtistsGateway;
+import com.ricardonavarrom.mercury.domain.NetworkArtistsGateway;
 
 import java.util.List;
 
 public class LoadArtistsInteractor implements Interactor {
 
     private LoadArtistsInteractorOutput output;
+    private LocalArtistsGateway localArtistsGateway;
     private NetworkArtistsGateway networkArtistsGateway;
 
-    public LoadArtistsInteractor(NetworkArtistsGateway networkArtistsGateway) {
+    public LoadArtistsInteractor(LocalArtistsGateway localArtistsGateway,
+                                 NetworkArtistsGateway networkArtistsGateway) {
+        this.localArtistsGateway = localArtistsGateway;
         this.networkArtistsGateway = networkArtistsGateway;
     }
 
@@ -29,9 +33,14 @@ public class LoadArtistsInteractor implements Interactor {
     }
 
     private void loadArtists() {
-        List<Artist> artistsList = networkArtistsGateway.getTop10ArtistsRanking();
-        output.onArtistsLoaded(artistsList);
-
+        List<Artist> artistsList = localArtistsGateway.load();
+        if (artistsList.isEmpty()) {
+            artistsList = networkArtistsGateway.load();
+            output.onArtistsLoaded(artistsList);
+            localArtistsGateway.update(artistsList);
+        } else {
+            output.onArtistsLoaded(artistsList);
+        }
     }
 
     public interface LoadArtistsInteractorOutput {
