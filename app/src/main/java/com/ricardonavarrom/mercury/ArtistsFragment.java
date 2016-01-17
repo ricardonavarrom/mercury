@@ -3,19 +3,21 @@ package com.ricardonavarrom.mercury;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.ricardonavarrom.mercury.adapter.ArtistListAdapter;
 import com.ricardonavarrom.mercury.dependency.PresenterFactory;
 import com.ricardonavarrom.mercury.domain.model.Artist;
 import com.ricardonavarrom.mercury.presentation.presenter.ArtistsPresenter;
 import com.ricardonavarrom.mercury.presentation.view.ArtistsView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static android.view.View.GONE;
@@ -23,7 +25,8 @@ import static android.view.View.VISIBLE;
 
 public class ArtistsFragment extends Fragment implements ArtistsView {
 
-    private ListView listView;
+    private RecyclerView recyclerView;
+    private ArtistListAdapter adapter;
     private ArtistsPresenter presenter;
     private ProgressBar progressBar;
 
@@ -37,8 +40,17 @@ public class ArtistsFragment extends Fragment implements ArtistsView {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
+        adapter = new ArtistListAdapter(new ArrayList<Artist>());
+
+        recyclerView = (RecyclerView) rootView.findViewById(R.id.artists_recycler_view);
+        recyclerView.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(adapter);
+
         progressBar = (ProgressBar) rootView.findViewById(R.id.artists_progress_bar);
-        listView = (ListView) rootView.findViewById(R.id.artists_listview);
 
         return rootView;
     }
@@ -51,12 +63,7 @@ public class ArtistsFragment extends Fragment implements ArtistsView {
 
     @Override
     public void setArtists(List<Artist> artists) {
-        listView.setAdapter(new ArrayAdapter<>(
-                        getActivity(),
-                        R.layout.item_artists,
-                        R.id.item_artists_textview,
-                        artists)
-        );
+        adapter.updateData(artists);
     }
 
     @Override
