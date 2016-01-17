@@ -11,7 +11,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.ricardonavarrom.mercury.dependencies.PresenterFactory;
+import com.ricardonavarrom.mercury.dependency.PresenterFactory;
 import com.ricardonavarrom.mercury.domain.model.Artist;
 import com.ricardonavarrom.mercury.presentation.presenter.ArtistsPresenter;
 import com.ricardonavarrom.mercury.presentation.view.ArtistsView;

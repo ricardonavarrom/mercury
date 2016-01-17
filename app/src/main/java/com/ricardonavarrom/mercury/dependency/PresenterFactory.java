@@ -1,4 +1,4 @@
-package com.ricardonavarrom.mercury.dependencies;
+package com.ricardonavarrom.mercury.dependency;
 
 import android.content.Context;
 import android.os.Handler;
