@@ -42,14 +42,36 @@ public class DbArtistMapper {
 
     private ContentValues mapArtistItemToDb(Artist artist) {
         ContentValues contentValues = new ContentValues();
+
         contentValues.put(ArtistContract.ArtistEntry.COLUMN_ID, artist.getId());
         contentValues.put(ArtistContract.ArtistEntry.COLUMN_NAME, artist.getName());
         contentValues.put(ArtistContract.ArtistEntry.COLUMN_RANK, artist.getRank());
         contentValues.put(ArtistContract.ArtistEntry.COLUMN_EXTERNAL_URL, artist.getExternalUrl());
         contentValues.put(ArtistContract.ArtistEntry.COLUMN_GENRES, artist.getGenres());
-        contentValues.put(ArtistContract.ArtistEntry.COLUMN_SMALL_IMAGE, artist.getSmallImage());
-        contentValues.put(ArtistContract.ArtistEntry.COLUMN_MEDIUM_IMAGE, artist.getMediumImage());
-        contentValues.put(ArtistContract.ArtistEntry.COLUMN_BIG_IMAGE, artist.getBigImage());
+
+        if (artist.getGenres() != null) {
+            contentValues.put(ArtistContract.ArtistEntry.COLUMN_GENRES, artist.getGenres());
+        } else {
+            contentValues.putNull(ArtistContract.ArtistEntry.COLUMN_GENRES);
+        }
+
+        if (artist.getSmallImage() != null) {
+            contentValues.put(ArtistContract.ArtistEntry.COLUMN_SMALL_IMAGE, artist.getSmallImage());
+        } else {
+            contentValues.putNull(ArtistContract.ArtistEntry.COLUMN_SMALL_IMAGE);
+        }
+
+        if (artist.getMediumImage() != null) {
+            contentValues.put(ArtistContract.ArtistEntry.COLUMN_MEDIUM_IMAGE, artist.getMediumImage());
+        } else {
+            contentValues.putNull(ArtistContract.ArtistEntry.COLUMN_MEDIUM_IMAGE);
+        }
+
+        if (artist.getBigImage() != null) {
+            contentValues.put(ArtistContract.ArtistEntry.COLUMN_BIG_IMAGE, artist.getBigImage());
+        } else {
+            contentValues.putNull(ArtistContract.ArtistEntry.COLUMN_BIG_IMAGE);
+        }
 
         return contentValues;
     }

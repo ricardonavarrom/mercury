@@ -1,8 +1,8 @@
 package com.ricardonavarrom.mercury.api.model;
 
 import com.google.gson.annotations.SerializedName;
-
 import java.util.List;
+
 public class SpotifyArtist {
 
     private String id;
@@ -34,16 +34,16 @@ public class SpotifyArtist {
 
     public SpotifyArtistImage getBigImage()
     {
-        return images.get(1);
+        return images.size() > 0 ? images.get(0) : null;
     }
 
     public SpotifyArtistImage getMediumImage()
     {
-        return images.get(2);
+        return images.size() > 1 ? images.get(1) : null;
     }
 
     public SpotifyArtistImage getSmallImage()
     {
-        return images.get(3);
+        return images.size() > 2 ? images.get(2) : null;
     }
 }

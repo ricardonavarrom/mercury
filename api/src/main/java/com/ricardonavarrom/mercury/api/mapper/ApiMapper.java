@@ -21,18 +21,26 @@ public class ApiMapper {
 
     public Artist mapSpotifyArtist(int id, int rank, SpotifyArtist spotifyArtist)
     {
-        String genres = spotifyArtist.getGenres().toString();
-        genres = genres.replace("[", "").replace("]", "");
-
         return new Artist.Builder()
                 .id(id)
                 .name(spotifyArtist.getName())
                 .rank(rank)
                 .externalUrl(spotifyArtist.getExternalUrls().getSpotify())
-                .genres(genres)
+                .genres(genresToString(spotifyArtist.getGenres()))
                 .smallImage(spotifyArtist.getSmallImage().getUrl())
                 .mediumImage(spotifyArtist.getMediumImage().getUrl())
                 .bigImage(spotifyArtist.getBigImage().getUrl())
                 .build();
+    }
+
+    private String genresToString(List<String> genres) {
+        String genresString = null;
+
+        if (!genres.isEmpty()) {
+            genresString = genres.toString();
+            genresString = genresString.replace("[", "").replace("]", "");
+        }
+
+        return genresString;
     }
 }
