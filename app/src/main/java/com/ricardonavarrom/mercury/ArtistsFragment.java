@@ -42,6 +42,12 @@ public class ArtistsFragment extends Fragment implements ArtistsView {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
         adapter = new ArtistListAdapter(new ArrayList<Artist>());
+        adapter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onArtistClick(view);
+            }
+        });
 
         recyclerView = (RecyclerView) rootView.findViewById(R.id.artists_recycler_view);
         recyclerView.setHasFixedSize(true);
@@ -79,6 +85,14 @@ public class ArtistsFragment extends Fragment implements ArtistsView {
     @Override
     public void showLoadArtistsError() {
         showError(R.string.error_load_artists);
+    }
+
+    private void onArtistClick(View view) {
+        Toast.makeText(
+            getContext(),
+            "Pulsado el elemento " + recyclerView.getChildAdapterPosition(view),
+            Toast.LENGTH_SHORT
+        ).show();
     }
 
     private void showError(@StringRes int error) {

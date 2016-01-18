@@ -6,14 +6,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.ricardonavarrom.mercury.R;
 import com.ricardonavarrom.mercury.domain.model.Artist;
 import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
-public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.ArtistsViewHolder> {
+public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.ArtistsViewHolder>
+        implements View.OnClickListener {
 
     private List<Artist> artists;
+    private View.OnClickListener listener;
 
     public static class ArtistsViewHolder extends RecyclerView.ViewHolder {
         public final TextView rankView;
@@ -57,6 +61,7 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.Ar
         View item = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.item_artists, viewGroup, false);
 
+        item.setOnClickListener(this);
         ArtistsViewHolder viewHolder = new ArtistsViewHolder(item);
 
         return viewHolder;
@@ -72,6 +77,16 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.Ar
     @Override
     public int getItemCount() {
         return artists.size();
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(listener != null)
+            listener.onClick(view);
+    }
+
+    public void setOnClickListener(View.OnClickListener listener) {
+        this.listener = listener;
     }
 
     public void updateData(List<Artist> artists) {
