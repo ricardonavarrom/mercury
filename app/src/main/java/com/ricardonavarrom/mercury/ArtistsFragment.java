@@ -1,5 +1,6 @@
 package com.ricardonavarrom.mercury;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
@@ -88,11 +89,8 @@ public class ArtistsFragment extends Fragment implements ArtistsView {
     }
 
     private void onArtistClick(View view) {
-        Toast.makeText(
-            getContext(),
-            "Pulsado el elemento " + recyclerView.getChildAdapterPosition(view),
-            Toast.LENGTH_SHORT
-        ).show();
+        Intent intent = new Intent(getActivity(), ArtistActivity.class);
+        startActivity(intent);
     }
 
     private void showError(@StringRes int error) {

@@ -24,7 +24,7 @@ public class LocalArtistGatewayImp implements LocalArtistsGateway {
     }
 
     @Override
-    public List<Artist> load() {
+    public List<Artist> getArtists() {
         List<Artist> artistsList = new ArrayList<>();
         Cursor cursor =
                 contentResolver.query(buildArtists(), null, null, null, null);
@@ -38,7 +38,7 @@ public class LocalArtistGatewayImp implements LocalArtistsGateway {
     }
 
     @Override
-    public void update(List<Artist> artistList) {
+    public void persistsArtists(List<Artist> artistList) {
         if (!artistList.isEmpty()) {
             List<ContentValues> contentValues = mapper.mapToDb(artistList);
             ContentValues[] values = contentValues.toArray(new ContentValues[contentValues.size()]);

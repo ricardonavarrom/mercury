@@ -33,11 +33,11 @@ public class LoadArtistsInteractor implements Interactor {
     }
 
     private void loadArtists() {
-        List<Artist> artistsList = localArtistsGateway.load();
+        List<Artist> artistsList = localArtistsGateway.getArtists();
         if (artistsList.isEmpty()) {
-            artistsList = networkArtistsGateway.load();
+            artistsList = networkArtistsGateway.getArtists();
             output.onArtistsLoaded(artistsList);
-            localArtistsGateway.update(artistsList);
+            localArtistsGateway.persistsArtists(artistsList);
         } else {
             output.onArtistsLoaded(artistsList);
         }

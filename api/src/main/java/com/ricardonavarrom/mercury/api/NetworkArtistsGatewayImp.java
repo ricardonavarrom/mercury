@@ -26,7 +26,7 @@ public class NetworkArtistsGatewayImp implements NetworkArtistsGateway {
         apiMapper = new ApiMapper();
     }
 
-    @Override public List<Artist> load() {
+    @Override public List<Artist> getArtists() {
         try {
             EchonestResponse echonestResponse =
                   echoNestApiClient.getArtistsRanking(echonestApiKey, "json", 10, "hotttnesss-desc")
