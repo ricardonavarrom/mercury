@@ -93,4 +93,8 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.Ar
         this.artists = artists;
         notifyDataSetChanged();
     }
+
+    public List<Artist> getArtists() {
+        return this.artists;
+    }
 }

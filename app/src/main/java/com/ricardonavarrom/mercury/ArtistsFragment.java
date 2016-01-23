@@ -1,6 +1,5 @@
 package com.ricardonavarrom.mercury;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
@@ -31,6 +30,10 @@ public class ArtistsFragment extends Fragment implements ArtistsView {
     private ArtistsPresenter presenter;
     private ProgressBar progressBar;
 
+    public interface Callback {
+        public void onItemSelected(Artist artist);
+    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +49,9 @@ public class ArtistsFragment extends Fragment implements ArtistsView {
         adapter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                onArtistClick(view);
+                int artistPosition = recyclerView.getChildAdapterPosition(view);
+                Artist selectedArtist = adapter.getArtists().get(artistPosition);
+                ((Callback) getActivity()).onItemSelected(selectedArtist);
             }
         });
 
@@ -86,11 +91,6 @@ public class ArtistsFragment extends Fragment implements ArtistsView {
     @Override
     public void showLoadArtistsError() {
         showError(R.string.error_load_artists);
-    }
-
-    private void onArtistClick(View view) {
-        Intent intent = new Intent(getActivity(), ArtistActivity.class);
-        startActivity(intent);
     }
 
     private void showError(@StringRes int error) {

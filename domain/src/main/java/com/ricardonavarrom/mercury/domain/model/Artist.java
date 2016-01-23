@@ -1,6 +1,8 @@
 package com.ricardonavarrom.mercury.domain.model;
 
-public class Artist {
+import java.io.Serializable;
+
+public class Artist implements Serializable {
 
     private int id;
     private String name;
@@ -159,5 +161,7 @@ public class Artist {
             return new Artist(this);
         }
     }
+
+
 }
 

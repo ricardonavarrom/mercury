@@ -7,8 +7,11 @@ import com.ricardonavarrom.mercury.presentation.InteractorExecutor;
 import com.ricardonavarrom.mercury.presentation.InteractorExecutorImp;
 import com.ricardonavarrom.mercury.presentation.MercuryViewInjector;
 import com.ricardonavarrom.mercury.presentation.ViewInjectorImp;
+import com.ricardonavarrom.mercury.presentation.presenter.ArtistPresenter;
+import com.ricardonavarrom.mercury.presentation.presenter.ArtistPresenterImp;
 import com.ricardonavarrom.mercury.presentation.presenter.ArtistsPresenter;
 import com.ricardonavarrom.mercury.presentation.presenter.ArtistsPresenterImp;
+import com.ricardonavarrom.mercury.presentation.view.ArtistView;
 import com.ricardonavarrom.mercury.presentation.view.ArtistsView;
 
 import java.util.concurrent.Executors;
@@ -22,6 +25,10 @@ public class PresenterFactory {
     public static ArtistsPresenter makeArtistsPresenter(Context context, ArtistsView view) {
         return new ArtistsPresenterImp(view, InteractorFactory.makeLoadArtistsInteractor(context),
                 makeInteractorExecutor(), makeViewInjector());
+    }
+
+    public static ArtistPresenter makeArtistPresenter(ArtistView view) {
+        return new ArtistPresenterImp(view);
     }
 
     private static InteractorExecutor makeInteractorExecutor() {

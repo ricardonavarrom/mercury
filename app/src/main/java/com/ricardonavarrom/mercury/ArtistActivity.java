@@ -1,11 +1,15 @@
 package com.ricardonavarrom.mercury;
 
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+
+import com.ricardonavarrom.mercury.domain.model.Artist;
 
 public class ArtistActivity extends AppCompatActivity {
 
@@ -25,6 +29,29 @@ public class ArtistActivity extends AppCompatActivity {
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        setArtistToFragment();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    private void setArtistToFragment() {
+        Artist artist = getArtistFromIntent(getIntent());
+
+        Bundle bundle = new Bundle();
+        bundle.putString("artistName", artist.getName());
+        ArtistFragment artistFragment = new ArtistFragment();
+        artistFragment.setArguments(bundle);
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.content_fragment_artist, artistFragment)
+                .commit();
+    }
+
+    private Artist getArtistFromIntent(Intent intent) {
+        Bundle bundle = intent.getExtras();
+        return (Artist)bundle.getSerializable("artist");
+    }
 }
