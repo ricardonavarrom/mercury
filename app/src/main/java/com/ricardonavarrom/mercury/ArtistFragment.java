@@ -5,15 +5,21 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.ricardonavarrom.mercury.dependency.PresenterFactory;
 import com.ricardonavarrom.mercury.presentation.presenter.ArtistPresenter;
 import com.ricardonavarrom.mercury.presentation.view.ArtistView;
+import com.squareup.picasso.Picasso;
 
 public class ArtistFragment extends Fragment implements ArtistView {
 
+    private TextView mRankView;
     private TextView mNameView;
+    private TextView mExternalUrlView;
+    private TextView mGenresView;
+    private ImageView mImageView;
 
     private ArtistPresenter presenter;
     private int artistId;
@@ -54,12 +60,38 @@ public class ArtistFragment extends Fragment implements ArtistView {
         super.onDestroy();
     }
 
+    @Override public void showRank(int rank) {
+        mRankView.setText(Integer.toString(rank));
+    }
+
     @Override public void showName(String name) {
         mNameView.setText(name);
     }
 
+    @Override public void showExternalUrl(String externalUrl) {
+        mExternalUrlView.setText(externalUrl);
+    }
+
+    @Override public void showGenres(String genres) {
+        mGenresView.setText(genres);
+    }
+
+    @Override
+    public void showImage(String image) {
+        Picasso
+                .with(mImageView.getContext())
+                .load(image)
+                .placeholder(R.drawable.image_loading)
+                .error(R.mipmap.no_image)
+                .into(mImageView);
+    }
+
     private void bindView(View rootView) {
-        mNameView = (TextView)rootView.findViewById(R.id.name_artist_detail);
+        mRankView = (TextView) rootView.findViewById(R.id.rank_artist_detail);
+        mNameView = (TextView) rootView.findViewById(R.id.name_artist_detail);
+        mExternalUrlView = (TextView) rootView.findViewById(R.id.external_url_artist_detail);
+        mGenresView = (TextView) rootView.findViewById(R.id.genres_artist_detail);
+        mImageView = (ImageView) rootView.findViewById(R.id.image_artist_detail);
     }
 
     private void getArgments() {
