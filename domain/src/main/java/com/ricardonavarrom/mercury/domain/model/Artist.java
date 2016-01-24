@@ -1,8 +1,6 @@
 package com.ricardonavarrom.mercury.domain.model;
 
-import java.io.Serializable;
-
-public class Artist implements Serializable {
+public class Artist {
 
     private int id;
     private String name;

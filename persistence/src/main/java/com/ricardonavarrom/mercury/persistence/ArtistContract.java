@@ -36,8 +36,17 @@ public class ArtistContract {
             return ContentUris.withAppendedId(CONTENT_URI, id);
         }
 
-        public static Uri buildArtists() {
+        public static Uri buildArtistsUri() {
             return CONTENT_URI.buildUpon().build();
+        }
+
+        public static Uri buildArtistWithIdUri(int artistId) {
+            return CONTENT_URI.buildUpon()
+                    .appendPath(Integer.toString(artistId)).build();
+        }
+
+        public static String getArtistIdFromUri(Uri uri) {
+            return uri.getPathSegments().get(1);
         }
     }
 }

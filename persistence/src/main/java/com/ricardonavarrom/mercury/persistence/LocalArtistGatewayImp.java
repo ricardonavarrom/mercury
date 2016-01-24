@@ -12,7 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.ricardonavarrom.mercury.persistence.ArtistContract.ArtistEntry.CONTENT_URI;
-import static com.ricardonavarrom.mercury.persistence.ArtistContract.ArtistEntry.buildArtists;
+import static com.ricardonavarrom.mercury.persistence.ArtistContract.ArtistEntry.buildArtistWithIdUri;
+import static com.ricardonavarrom.mercury.persistence.ArtistContract.ArtistEntry.buildArtistsUri;
 
 public class LocalArtistGatewayImp implements LocalArtistsGateway {
 
@@ -27,7 +28,7 @@ public class LocalArtistGatewayImp implements LocalArtistsGateway {
     public List<Artist> getArtists() {
         List<Artist> artistsList = new ArrayList<>();
         Cursor cursor =
-                contentResolver.query(buildArtists(), null, null, null, null);
+                contentResolver.query(buildArtistsUri(), null, null, null, null);
         if (cursor != null) {
             while (cursor.moveToNext()) {
                 artistsList.add(mapper.mapFromDb(cursor));
@@ -44,5 +45,18 @@ public class LocalArtistGatewayImp implements LocalArtistsGateway {
             ContentValues[] values = contentValues.toArray(new ContentValues[contentValues.size()]);
             contentResolver.bulkInsert(CONTENT_URI, values);
         }
+    }
+
+    @Override public Artist getArtist(int artistId) {
+        Artist artist = null;
+        Cursor cursor =
+                contentResolver.query(buildArtistWithIdUri(artistId), null, null, null, null);
+        if (cursor != null) {
+            if (cursor.moveToNext()) {
+                artist = mapper.mapFromDb(cursor);
+            }
+            cursor.close();
+        }
+        return artist;
     }
 }

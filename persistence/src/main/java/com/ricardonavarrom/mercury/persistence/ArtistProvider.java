@@ -14,6 +14,7 @@ public class ArtistProvider extends ContentProvider {
     private static final UriMatcher sUriMatcher = buildUriMatcher();
     private ArtistDbHelper mOpenHelper;
     static final int ARTIST = 100;
+    static final int ARTIST_WHITH_ID = 101;
 
     private static final SQLiteQueryBuilder sQueryBuilder;
 
@@ -22,11 +23,23 @@ public class ArtistProvider extends ContentProvider {
         sQueryBuilder.setTables(ArtistContract.ArtistEntry.TABLE_NAME);
     }
 
+    private static final String sArtistIdSelection = ArtistContract.ArtistEntry.TABLE_NAME +
+            "." + ArtistContract.ArtistEntry.COLUMN_ID + " = ? ";
+
+    private Cursor getArtistById(Uri uri, String[] projection, String sortOrder) {
+        String artistId = ArtistContract.ArtistEntry.getArtistIdFromUri(uri);
+
+        return sQueryBuilder.query(mOpenHelper.getReadableDatabase(),
+                projection, sArtistIdSelection,
+                new String[] {artistId}, null, null, sortOrder);
+    }
+
     static UriMatcher buildUriMatcher() {
         final UriMatcher matcher = new UriMatcher(UriMatcher.NO_MATCH);
         final String authority = ArtistContract.CONTENT_AUTHORITY;
 
         matcher.addURI(authority, ArtistContract.PATH_ARTIST, ARTIST);
+        matcher.addURI(authority, ArtistContract.PATH_ARTIST + "/*", ARTIST_WHITH_ID);
 
         return matcher;
     }
@@ -48,6 +61,10 @@ public class ArtistProvider extends ContentProvider {
                                 selectionArgs, null, null, sortOrder);
                 break;
             }
+            case ARTIST_WHITH_ID: {
+                retCursor = getArtistById(uri, projection, sortOrder);
+                break;
+            }
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }
@@ -62,6 +79,8 @@ public class ArtistProvider extends ContentProvider {
         switch (match) {
             case ARTIST:
                 return ArtistContract.ArtistEntry.CONTENT_TYPE;
+            case ARTIST_WHITH_ID:
+                return ArtistContract.ArtistEntry.CONTENT_ITEM_TYPE;
             default:
                 throw new UnsupportedOperationException("Unknown uri: " + uri);
         }

@@ -27,8 +27,9 @@ public class PresenterFactory {
                 makeInteractorExecutor(), makeViewInjector());
     }
 
-    public static ArtistPresenter makeArtistPresenter(ArtistView view) {
-        return new ArtistPresenterImp(view);
+    public static ArtistPresenter makeArtistPresenter(Context context, ArtistView view) {
+        return new ArtistPresenterImp(view, makeThreadSpec(), InteractorFactory.makeLoadArtistInteractor(context),
+                makeInteractorExecutor());
     }
 
     private static InteractorExecutor makeInteractorExecutor() {

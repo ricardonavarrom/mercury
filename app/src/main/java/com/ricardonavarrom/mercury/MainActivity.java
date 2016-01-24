@@ -1,6 +1,5 @@
 package com.ricardonavarrom.mercury;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -39,10 +38,6 @@ public class MainActivity extends AppCompatActivity implements ArtistsFragment.C
 
     @Override
     public void onItemSelected(Artist artist) {
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("artist", artist);
-        Intent intent = new Intent(this, ArtistActivity.class);
-        intent.putExtras(bundle);
-        startActivity(intent);
+        ArtistActivity.startActivity(this, artist);
     }
 }

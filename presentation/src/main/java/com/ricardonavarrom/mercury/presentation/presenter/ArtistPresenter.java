@@ -1,5 +1,8 @@
 package com.ricardonavarrom.mercury.presentation.presenter;
 
+
 public interface ArtistPresenter {
-    void onResume(String artist);
+    void setArtistId(int artistId);
+    void onUiReady();
+    void detachView();
 }

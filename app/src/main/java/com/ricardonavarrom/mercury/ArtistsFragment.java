@@ -31,7 +31,7 @@ public class ArtistsFragment extends Fragment implements ArtistsView {
     private ProgressBar progressBar;
 
     public interface Callback {
-        public void onItemSelected(Artist artist);
+        void onItemSelected(Artist artist);
     }
 
     @Override

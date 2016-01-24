@@ -2,6 +2,7 @@ package com.ricardonavarrom.mercury;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,33 +17,44 @@ public class ArtistFragment extends Fragment implements ArtistView {
     private TextView mNameView;
 
     private ArtistPresenter presenter;
-    private String artistName;
+    private int artistId;
+
+    public static ArtistFragment newInstance(int artistId) {
+        ArtistFragment artistFragment = new ArtistFragment();
+        Bundle arguments = new Bundle();
+        arguments.putInt("artistId", artistId);
+        artistFragment.setArguments(arguments);
+
+        return artistFragment;
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        presenter = PresenterFactory.makeArtistPresenter(this);
+        presenter = PresenterFactory.makeArtistPresenter(getActivity(), this);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        getArgments();
         View rootView = inflater.inflate(R.layout.fragment_artist, container, false);
-
-        Bundle arguments = getArguments();
-        if (arguments != null) {
-            artistName = arguments.getString("artistName");
-        }
-
         bindView(rootView);
+
+        Log.v("****ENTRO AL FRAGMENT CON EL ID", Integer.toString(artistId));
 
         return rootView;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        presenter.onResume(artistName);
+    @Override public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        presenter.setArtistId(artistId);
+        presenter.onUiReady();
+    }
+
+    @Override public void onDestroy() {
+        presenter.detachView();
+        super.onDestroy();
     }
 
     @Override public void showName(String name) {
@@ -51,5 +63,12 @@ public class ArtistFragment extends Fragment implements ArtistView {
 
     private void bindView(View rootView) {
         mNameView = (TextView)rootView.findViewById(R.id.name_artist_detail);
+    }
+
+    private void getArgments() {
+        Bundle arguments = getArguments();
+        if (arguments != null) {
+            artistId = arguments.getInt("artistId");
+        }
     }
 }

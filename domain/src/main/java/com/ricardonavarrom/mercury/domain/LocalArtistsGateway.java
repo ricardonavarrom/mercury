@@ -7,4 +7,5 @@ import java.util.List;
 public interface LocalArtistsGateway {
     List<Artist> getArtists();
     void persistsArtists(List<Artist> artistList);
+    Artist getArtist(int artistId);
 }
