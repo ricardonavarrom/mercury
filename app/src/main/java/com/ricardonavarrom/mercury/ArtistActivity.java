@@ -42,7 +42,7 @@ public class ArtistActivity extends AppCompatActivity {
             ArtistFragment artistFragment = ArtistFragment.newInstance(artistId);
             getSupportFragmentManager()
                     .beginTransaction()
-                    .replace(R.id.content_fragment_artist, artistFragment)
+                    .replace(R.id.content_fragment_artist_container, artistFragment)
                     .commit();
         }
     }

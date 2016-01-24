@@ -2,7 +2,6 @@ package com.ricardonavarrom.mercury;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,11 +36,9 @@ public class ArtistFragment extends Fragment implements ArtistView {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        getArgments();
         View rootView = inflater.inflate(R.layout.fragment_artist, container, false);
+        getArgments();
         bindView(rootView);
-
-        Log.v("****ENTRO AL FRAGMENT CON EL ID", Integer.toString(artistId));
 
         return rootView;
     }
