@@ -5,7 +5,8 @@ import me.panavtec.threaddecoratedview.views.qualifiers.ThreadDecoratedView;
 @ThreadDecoratedView public interface ArtistView {
     void showRank(int rank);
     void showName(String name);
-    void showExternalUrl(String externalUrl);
+    void showUrl(String url);
+    void showUri(String uri);
     void showGenres(String genres);
     void showImage(String image);
 }

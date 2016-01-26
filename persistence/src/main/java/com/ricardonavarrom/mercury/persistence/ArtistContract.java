@@ -26,7 +26,8 @@ public class ArtistContract {
         public static final String COLUMN_ID = "id";
         public static final String COLUMN_NAME = "name";
         public static final String COLUMN_RANK = "rank";
-        public static final String COLUMN_EXTERNAL_URL = "external_url";
+        public static final String COLUMN_URL = "url";
+        public static final String COLUMN_URI = "uri";
         public static final String COLUMN_GENRES = "genres";
         public static final String COLUMN_SMALL_IMAGE = "small_image";
         public static final String COLUMN_MEDIUM_IMAGE = "medium_image";

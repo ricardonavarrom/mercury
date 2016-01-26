@@ -17,7 +17,8 @@ public class ArtistFragment extends Fragment implements ArtistView {
 
     private TextView mRankView;
     private TextView mNameView;
-    private TextView mExternalUrlView;
+    private TextView mUrlView;
+    private TextView mUriView;
     private TextView mGenresView;
     private ImageView mImageView;
 
@@ -68,8 +69,12 @@ public class ArtistFragment extends Fragment implements ArtistView {
         mNameView.setText(name);
     }
 
-    @Override public void showExternalUrl(String externalUrl) {
-        mExternalUrlView.setText(externalUrl);
+    @Override public void showUrl(String url) {
+        mUrlView.setText(url);
+    }
+
+    @Override public void showUri(String uri) {
+        mUriView.setText(uri);
     }
 
     @Override public void showGenres(String genres) {
@@ -89,7 +94,8 @@ public class ArtistFragment extends Fragment implements ArtistView {
     private void bindView(View rootView) {
         mRankView = (TextView) rootView.findViewById(R.id.rank_artist_detail);
         mNameView = (TextView) rootView.findViewById(R.id.name_artist_detail);
-        mExternalUrlView = (TextView) rootView.findViewById(R.id.external_url_artist_detail);
+        mUrlView = (TextView) rootView.findViewById(R.id.url_artist_detail);
+        mUriView = (TextView) rootView.findViewById(R.id.uri_artist_detail);
         mGenresView = (TextView) rootView.findViewById(R.id.genres_artist_detail);
         mImageView = (ImageView) rootView.findViewById(R.id.image_artist_detail);
     }

@@ -18,7 +18,8 @@ public class ArtistDbHelper extends SQLiteOpenHelper {
             ArtistContract.ArtistEntry.COLUMN_ID + " INTEGER PRIMARY KEY," +
             ArtistContract.ArtistEntry.COLUMN_NAME + " TEXT NOT NULL, " +
             ArtistContract.ArtistEntry.COLUMN_RANK + " INTEGER NOT NULL, " +
-            ArtistContract.ArtistEntry.COLUMN_EXTERNAL_URL + " TEXT NOT NULL, " +
+            ArtistContract.ArtistEntry.COLUMN_URL + " TEXT NOT NULL, " +
+            ArtistContract.ArtistEntry.COLUMN_URI + " TEXT NOT NULL, " +
             ArtistContract.ArtistEntry.COLUMN_GENRES + " TEXT, " +
             ArtistContract.ArtistEntry.COLUMN_SMALL_IMAGE + " TEXT NOT NULL, " +
             ArtistContract.ArtistEntry.COLUMN_MEDIUM_IMAGE + " TEXT NOT NULL, " +

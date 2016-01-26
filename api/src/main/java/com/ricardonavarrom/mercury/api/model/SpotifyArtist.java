@@ -9,6 +9,7 @@ public class SpotifyArtist {
     private String name;
     @SerializedName("external_urls")
     private SpotifyExternalUrls externalUrls;
+    private String uri;
     private List<String> genres;
     private List<SpotifyArtistImage> images;
 
@@ -26,6 +27,10 @@ public class SpotifyArtist {
 
     public SpotifyExternalUrls getExternalUrls() {
         return externalUrls;
+    }
+
+    public String getSpotifyUri() {
+        return uri;
     }
 
     public List<SpotifyArtistImage> getImages() {

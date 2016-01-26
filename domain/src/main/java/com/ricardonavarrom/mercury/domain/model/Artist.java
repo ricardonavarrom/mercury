@@ -5,7 +5,8 @@ public class Artist {
     private int id;
     private String name;
     private int rank;
-    private String externalUrl;
+    private String url;
+    private String uri;
     private String genres;
     private String smallImage;
     private String mediumImage;
@@ -35,12 +36,20 @@ public class Artist {
         this.rank = rank;
     }
 
-    public String getExternalUrl() {
-        return externalUrl;
+    public String getUrl() {
+        return url;
     }
 
-    public void setExternalUrl(String externalUrl) {
-        this.externalUrl = externalUrl;
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getUri() {
+        return uri;
+    }
+
+    public void setUri(String uri) {
+        this.uri = uri;
     }
 
     public String getGenres() {
@@ -84,7 +93,8 @@ public class Artist {
         this.id = builder.id;
         this.name = builder.name;
         this.rank = builder.rank;
-        this.externalUrl = builder.externalUrl;
+        this.url = builder.url;
+        this.uri = builder.uri;
         this.genres = builder.genres;
         this.smallImage = builder.smallImage;
         this.mediumImage = builder.mediumImage;
@@ -95,7 +105,8 @@ public class Artist {
         private int id;
         private String name;
         private int rank;
-        private String externalUrl;
+        private String url;
+        private String uri;
         private String genres;
         private String smallImage;
         private String mediumImage;
@@ -120,9 +131,16 @@ public class Artist {
             return this;
         }
 
-        public Builder externalUrl(String externalUrl)
+        public Builder url(String url)
         {
-            this.externalUrl = externalUrl;
+            this.url = url;
+
+            return this;
+        }
+
+        public Builder uri(String uri)
+        {
+            this.uri = uri;
 
             return this;
         }
