@@ -14,6 +14,7 @@ android {
         buildConfigField 'String', 'ECHONEST_API_KEY', '"RLYRTQDYNZ3W8VMUF"'
         buildConfigField 'String', "ECHONEST_API_URL", '"https://developer.echonest.com/api/v4/"'
         buildConfigField 'String', "SPOTIFY_API_URL", '"https://api.spotify.com/v1/"'
+        buildConfigField 'String', "SPOTIFY_PACKAGE_NAME", '"com.spotify.music"'
     }
     buildTypes {
         release {
