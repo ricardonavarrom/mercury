@@ -6,7 +6,7 @@
     <string name="title_activity_artist">Artist detail</string>
     <string name="title_activity_settings">Settings</string>
 
-    <string name="pref_artists_rank_number_label">Artist ranking number</string>
+    <string name="pref_artists_rank_number_label">Artists ranking number</string>
     <string name="pref_artists_rank_number_key">artistsRankingNumber</string>
-    <string name="pref_artists_rank_number_default" translatable="false">10</string>
+    <string name="pref_artists_rank_number_default" translatable="false">1</string>
 </resources>

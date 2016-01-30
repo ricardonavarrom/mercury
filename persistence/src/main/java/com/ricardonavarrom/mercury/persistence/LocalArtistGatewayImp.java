@@ -39,6 +39,11 @@ public class LocalArtistGatewayImp implements LocalArtistsGateway {
     }
 
     @Override
+    public void removeAllArtists() {
+        contentResolver.delete(CONTENT_URI, null, null);
+    }
+
+    @Override
     public void persistsArtists(List<Artist> artistList) {
         if (!artistList.isEmpty()) {
             List<ContentValues> contentValues = mapper.mapToDb(artistList);

@@ -24,6 +24,7 @@ public class PresenterFactory {
 
     public static ArtistsPresenter makeArtistsPresenter(Context context, ArtistsView view) {
         return new ArtistsPresenterImp(view, InteractorFactory.makeLoadArtistsInteractor(context),
+                InteractorFactory.makeRefreshArtistsInteractor(context),
                 makeInteractorExecutor(), makeViewInjector());
     }
 

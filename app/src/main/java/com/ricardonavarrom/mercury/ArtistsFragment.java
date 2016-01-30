@@ -67,10 +67,23 @@ public class ArtistsFragment extends Fragment implements ArtistsView {
         return rootView;
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        presenter.onResume();
+    @Override public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        int artistsRankingNumber = ((MainActivity) getActivity()).getPreferredArtistRankingNumber();
+        presenter.onUiReady(artistsRankingNumber);
+    }
+
+    @Override public void onDestroy() {
+        presenter.detachView();
+        super.onDestroy();
+    }
+
+    public void onUiReady(int actualArtistsRankingNumber) {
+        presenter.onUiReady(actualArtistsRankingNumber);
+    }
+
+    public void onSharedPreferenceChanged(int actualArtistsRankingNumber) {
+        presenter.onSharedPreferenceChanged(actualArtistsRankingNumber);
     }
 
     @Override
