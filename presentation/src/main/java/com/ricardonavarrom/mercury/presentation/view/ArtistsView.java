@@ -8,5 +8,8 @@ import me.panavtec.threaddecoratedview.views.qualifiers.ThreadDecoratedView;
     void setArtists(List<Artist> artists);
     void showLoading();
     void hideLoading();
+    void showRefreshButton();
+    void hideRefreshButton();
     void showLoadArtistsError();
+    void showNetworkError();
 }

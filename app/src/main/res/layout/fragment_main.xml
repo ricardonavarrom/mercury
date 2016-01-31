@@ -17,6 +17,14 @@
         android:layout_height="match_parent"
         android:layout_centerInParent="true" />
 
+    <Button xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/refresh_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/action_refresh_artists_ranking"
+        android:onClick="refreshArtistsRanking"
+        android:visibility="gone" />
+
     <ProgressBar
         android:id="@+id/artists_progress_bar"
         android:layout_width="wrap_content"

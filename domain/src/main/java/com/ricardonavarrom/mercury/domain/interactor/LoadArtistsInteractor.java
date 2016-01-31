@@ -1,8 +1,8 @@
 package com.ricardonavarrom.mercury.domain.interactor;
 
 import com.ricardonavarrom.mercury.domain.LocalArtistsGateway;
-import com.ricardonavarrom.mercury.domain.model.Artist;
 import com.ricardonavarrom.mercury.domain.NetworkArtistsGateway;
+import com.ricardonavarrom.mercury.domain.model.Artist;
 
 import java.util.List;
 
@@ -14,6 +14,7 @@ public class LoadArtistsInteractor implements Interactor {
 
     private int artistsRankingNumber;
     private String artistsRankingGenre;
+    private boolean isOnline;
 
     public LoadArtistsInteractor(LocalArtistsGateway localArtistsGateway,
                                  NetworkArtistsGateway networkArtistsGateway) {
@@ -43,13 +44,21 @@ public class LoadArtistsInteractor implements Interactor {
         this.artistsRankingGenre = artistsRankingGenre;
     }
 
+    public void setIsOnline(boolean isOnline) {
+        this.isOnline = isOnline;
+    }
+
     private void loadArtists() {
         List<Artist> artistsList = localArtistsGateway.getArtists();
         if (artistsList.isEmpty()) {
-            artistsList = networkArtistsGateway.getArtists(artistsRankingNumber,
-                    artistsRankingGenre);
-            output.onArtistsLoaded(artistsList);
-            localArtistsGateway.persistsArtists(artistsList);
+            if (!isOnline) {
+                output.onNetworkError();
+            } else {
+                artistsList = networkArtistsGateway.getArtists(artistsRankingNumber,
+                        artistsRankingGenre);
+                output.onArtistsLoaded(artistsList);
+                localArtistsGateway.persistsArtists(artistsList);
+            }
         } else {
             output.onArtistsLoaded(artistsList);
         }
@@ -59,5 +68,7 @@ public class LoadArtistsInteractor implements Interactor {
         void onArtistsLoaded(List<Artist> artists);
 
         void onLoadArtistsError();
+
+        void onNetworkError();
     }
 }

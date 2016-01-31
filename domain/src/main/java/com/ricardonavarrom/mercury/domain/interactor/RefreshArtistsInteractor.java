@@ -13,7 +13,8 @@ public class RefreshArtistsInteractor implements Interactor {
     private NetworkArtistsGateway networkArtistsGateway;
 
     private int artistsRankingNumber;
-    String artistsRankingGenre;
+    private String artistsRankingGenre;
+    private boolean isOnline;
 
     public RefreshArtistsInteractor(LocalArtistsGateway localArtistsGateway,
                                     NetworkArtistsGateway networkArtistsGateway) {
@@ -43,17 +44,27 @@ public class RefreshArtistsInteractor implements Interactor {
         this.artistsRankingGenre = artistsRankingGenre;
     }
 
+    public void setIsOnline(boolean isOnline) {
+        this.isOnline = isOnline;
+    }
+
     private void refreshArtists() {
-        List<Artist> artistsList = networkArtistsGateway.getArtists(artistsRankingNumber,
-                artistsRankingGenre);
-        output.onArtistsRefreshed(artistsList);
-        localArtistsGateway.removeAllArtists();
-        localArtistsGateway.persistsArtists(artistsList);
+        if (!isOnline) {
+            output.onNetworkError();
+        } else {
+            List<Artist> artistsList = networkArtistsGateway.getArtists(artistsRankingNumber,
+                    artistsRankingGenre);
+            output.onArtistsRefreshed(artistsList);
+            localArtistsGateway.removeAllArtists();
+            localArtistsGateway.persistsArtists(artistsList);
+        }
     }
 
     public interface RefreshArtistsInteractorOutput {
         void onArtistsRefreshed(List<Artist> artists);
 
         void onRefreshArtistsError();
+
+        void onNetworkError();
     }
 }

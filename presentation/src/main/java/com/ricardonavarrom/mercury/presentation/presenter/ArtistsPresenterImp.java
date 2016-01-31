@@ -9,6 +9,7 @@ import com.ricardonavarrom.mercury.presentation.InteractorExecutor;
 import com.ricardonavarrom.mercury.presentation.MercuryViewInjector;
 import com.ricardonavarrom.mercury.presentation.view.ArtistsView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import me.panavtec.threaddecoratedview.views.ViewInjector;
@@ -22,9 +23,6 @@ public class ArtistsPresenterImp implements ArtistsPresenter, LoadArtistsInterac
     private final InteractorExecutor interactorExecutor;
     private final MercuryViewInjector viewInjector;
 
-    int artistsRankingNumber;
-    String artistsRankingGenre;
-
     public ArtistsPresenterImp(ArtistsView view, LoadArtistsInteractor loadArtistsInteractor,
                                RefreshArtistsInteractor refreshArtistsInteractor,
                                InteractorExecutor interactorExecutor,
@@ -37,24 +35,23 @@ public class ArtistsPresenterImp implements ArtistsPresenter, LoadArtistsInterac
     }
 
     @Override
-    public void onUiReady(int artistsRankingNumber, String artistsRankingGenre) {
+    public void onUiReady(int artistsRankingNumber, String artistsRankingGenre, boolean isOnline) {
         view.showLoading();
-        this.artistsRankingNumber = artistsRankingNumber;
-        this.artistsRankingGenre = artistsRankingGenre;
         loadArtistsInteractor.setArtistsRankingNumber(artistsRankingNumber);
         loadArtistsInteractor.setArtistsRankingGenre(artistsRankingGenre);
+        loadArtistsInteractor.setIsOnline(isOnline);
         loadArtistsInteractor.setOutput(this);
         interactorExecutor.execute(loadArtistsInteractor);
         view = viewInjector.inject(view);
     }
 
     @Override
-    public void onSharedPreferenceChanged(int artistsRankingNumber, String artistsRankingGenre) {
+    public void onRefreshNecessary(int artistsRankingNumber, String artistsRankingGenre,
+                                   boolean isOnline) {
         view.showLoading();
-        this.artistsRankingNumber = artistsRankingNumber;
-        this.artistsRankingGenre = artistsRankingGenre;
         refreshArtistsInteractor.setArtistsRankingNumber(artistsRankingNumber);
         refreshArtistsInteractor.setArtistsRankingGenre(artistsRankingGenre);
+        refreshArtistsInteractor.setIsOnline(isOnline);
         refreshArtistsInteractor.setOutput(this);
         interactorExecutor.execute(refreshArtistsInteractor);
         view = viewInjector.inject(view);
@@ -68,6 +65,16 @@ public class ArtistsPresenterImp implements ArtistsPresenter, LoadArtistsInterac
     @Override
     public void onArtistsLoaded(List<Artist> artists) {
         view.hideLoading();
+        view.hideRefreshButton();
+        if (view != null) {
+            view.setArtists(artists);
+        }
+    }
+
+    @Override
+    public void onArtistsRefreshed(List<Artist> artists) {
+        view.hideLoading();
+        view.hideRefreshButton();
         if (view != null) {
             view.setArtists(artists);
         }
@@ -75,17 +82,22 @@ public class ArtistsPresenterImp implements ArtistsPresenter, LoadArtistsInterac
 
     @Override
     public void onLoadArtistsError() {
-    }
-
-    @Override
-    public void onArtistsRefreshed(List<Artist> artists) {
         view.hideLoading();
-        if (view != null) {
-            view.setArtists(artists);
-        }
+        view.showLoadArtistsError();
     }
 
     @Override
     public void onRefreshArtistsError() {
+        view.hideLoading();
+        view.showLoadArtistsError();
+    }
+
+    @Override
+    public void onNetworkError() {
+        view.hideLoading();
+        List<Artist> emptyArtistsList = new ArrayList<>();
+        view.setArtists(emptyArtistsList);
+        view.showRefreshButton();
+        view.showNetworkError();
     }
 }

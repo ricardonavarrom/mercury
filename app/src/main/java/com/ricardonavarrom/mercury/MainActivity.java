@@ -1,7 +1,10 @@
 package com.ricardonavarrom.mercury;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
@@ -56,8 +59,8 @@ public class MainActivity extends AppCompatActivity implements ArtistsFragment.C
             ArtistsFragment artistsFragment = (ArtistsFragment)
                     getSupportFragmentManager().findFragmentById(R.id.content_fragment_artists);
             if (artistsFragment != null) {
-                artistsFragment.onSharedPreferenceChanged(actualArtistsRankingNumber,
-                        actualArtistsRankingGenre);
+                artistsFragment.onRefreshNecessary(actualArtistsRankingNumber,
+                        actualArtistsRankingGenre, isOnline());
             }
         }
         artistsRankingNumber = actualArtistsRankingNumber;
@@ -95,5 +98,25 @@ public class MainActivity extends AppCompatActivity implements ArtistsFragment.C
                 getString(R.string.pref_artists_rank_genre_key),
                 getString(R.string.pref_artists_rank_genre_default)
         );
+    }
+
+    public void refreshArtistsRanking(View view) {
+        int actualArtistsRankingNumber = getPreferredArtistsRankingNumber();
+        String actualArtistsRankingGenre = getPreferredArtistsRankingGenre();
+
+        ArtistsFragment artistsFragment = (ArtistsFragment)
+                getSupportFragmentManager().findFragmentById(R.id.content_fragment_artists);
+        if (artistsFragment != null) {
+            artistsFragment.onRefreshNecessary(actualArtistsRankingNumber,
+                    actualArtistsRankingGenre, isOnline());
+        }
+    }
+
+    public boolean isOnline() {
+        ConnectivityManager cm =
+                (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo netInfo = cm.getActiveNetworkInfo();
+
+        return netInfo != null && netInfo.isConnectedOrConnecting();
     }
 }

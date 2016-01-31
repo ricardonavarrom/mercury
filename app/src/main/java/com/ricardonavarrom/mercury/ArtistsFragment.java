@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -29,6 +30,7 @@ public class ArtistsFragment extends Fragment implements ArtistsView {
     private ArtistListAdapter adapter;
     private ArtistsPresenter presenter;
     private ProgressBar progressBar;
+    private Button refreshButton;
 
     public interface Callback {
         void onItemSelected(Artist artist);
@@ -63,6 +65,7 @@ public class ArtistsFragment extends Fragment implements ArtistsView {
         recyclerView.setAdapter(adapter);
 
         progressBar = (ProgressBar) rootView.findViewById(R.id.artists_progress_bar);
+        refreshButton = (Button) rootView.findViewById(R.id.refresh_button);
 
         return rootView;
     }
@@ -71,7 +74,7 @@ public class ArtistsFragment extends Fragment implements ArtistsView {
         super.onViewCreated(view, savedInstanceState);
         int artistsRankingNumber = ((MainActivity) getActivity()).getPreferredArtistsRankingNumber();
         String artistsRankingGenre = ((MainActivity) getActivity()).getPreferredArtistsRankingGenre();
-        presenter.onUiReady(artistsRankingNumber, artistsRankingGenre);
+        onUiReady(artistsRankingNumber, artistsRankingGenre);
     }
 
     @Override public void onDestroy() {
@@ -79,9 +82,15 @@ public class ArtistsFragment extends Fragment implements ArtistsView {
         super.onDestroy();
     }
 
-    public void onSharedPreferenceChanged(int actualArtistsRankingNumber,
-                                          String actualArtistsRankingGenre) {
-        presenter.onSharedPreferenceChanged(actualArtistsRankingNumber, actualArtistsRankingGenre);
+    public void onUiReady(int actualArtistsRankingNumber, String actualArtistsRankingGenre) {
+        boolean isOnline = ((MainActivity) getActivity()).isOnline();
+        presenter.onUiReady(actualArtistsRankingNumber, actualArtistsRankingGenre, isOnline);
+    }
+
+    public void onRefreshNecessary(int actualArtistsRankingNumber,
+                                   String actualArtistsRankingGenre, boolean isOnline) {
+        presenter.onRefreshNecessary(actualArtistsRankingNumber, actualArtistsRankingGenre,
+                isOnline);
     }
 
     @Override
@@ -100,11 +109,26 @@ public class ArtistsFragment extends Fragment implements ArtistsView {
     }
 
     @Override
+    public void showRefreshButton() {
+        refreshButton.setVisibility(VISIBLE);
+    }
+
+    @Override
+    public void hideRefreshButton() {
+        refreshButton.setVisibility(GONE);
+    }
+
+    @Override
     public void showLoadArtistsError() {
         showError(R.string.error_load_artists);
     }
 
+    @Override
+    public void showNetworkError() {
+        showError(R.string.error_network);
+    }
+
     private void showError(@StringRes int error) {
-        Toast.makeText(getActivity(), getString(error), Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), getString(error), Toast.LENGTH_LONG).show();
     }
 }
