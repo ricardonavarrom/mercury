@@ -49,13 +49,13 @@ public class RefreshArtistsInteractor implements Interactor {
     }
 
     private void refreshArtists() {
+        localArtistsGateway.removeAllArtists();
         if (!isOnline) {
             output.onNetworkError();
         } else {
             List<Artist> artistsList = networkArtistsGateway.getArtists(artistsRankingNumber,
                     artistsRankingGenre);
             output.onArtistsRefreshed(artistsList);
-            localArtistsGateway.removeAllArtists();
             localArtistsGateway.persistsArtists(artistsList);
         }
     }
