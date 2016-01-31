@@ -3,13 +3,16 @@
     <string name="action_settings">Settings</string>
     <string name="action_refresh_artists_ranking">Refresh artists ranking</string>
     <string name="error.load_artists">Error loading artists</string>
+    <string name="error_pref_artists_rank_number">Value out of range (1-50)</string>
     <string name="error.network">Network connection necessary</string>
     <string name="title_activity_artist">Artist detail</string>
     <string name="title_activity_settings">Settings</string>
 
     <string name="pref_artists_rank_number_key">artistsRankingNumber</string>
-    <string name="pref_artists_rank_number_label">Artists ranking number</string>
+    <string name="pref_artists_rank_number_label">Artists ranking number (1-50)</string>
     <string name="pref_artists_rank_number_default" translatable="false">10</string>
+    <string name="pref_artists_rank_number_min" translatable="false">1</string>
+    <string name="pref_artists_rank_number_max" translatable="false">50</string>
 
 
     <string name="pref_artists_rank_genre_key">artistsRankingGenres</string>

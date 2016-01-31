@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class SettingsActivity extends PreferenceActivity
         implements Preference.OnPreferenceChangeListener {
@@ -38,6 +39,15 @@ public class SettingsActivity extends PreferenceActivity
     @Override
     public boolean onPreferenceChange(Preference preference, Object value) {
         String stringValue = value.toString();
+
+        if (preference.getKey() == getString(R.string.pref_artists_rank_number_key) ) {
+            if (!validateArtistsRankingNumber(preference, stringValue)) {
+                Toast.makeText(this, getText(R.string.error_pref_artists_rank_number),
+                        Toast.LENGTH_SHORT).show();
+
+                return false;
+            }
+        }
 
         if (preference instanceof ListPreference) {
             ListPreference listPreference = (ListPreference) preference;
@@ -71,5 +81,13 @@ public class SettingsActivity extends PreferenceActivity
     @Override
     public Intent getParentActivityIntent() {
         return super.getParentActivityIntent().addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+    }
+
+    private boolean validateArtistsRankingNumber(Preference preference, String stringValue) {
+        int artistsRankingNumber = Integer.parseInt(stringValue);
+        int minValue = Integer.parseInt(getString(R.string.pref_artists_rank_number_min));
+        int maxValue = Integer.parseInt(getString(R.string.pref_artists_rank_number_max));
+
+        return (artistsRankingNumber >= minValue && artistsRankingNumber <= maxValue);
     }
 }
