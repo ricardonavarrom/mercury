@@ -48,6 +48,7 @@ public class SettingsActivity extends PreferenceActivity
         } else {
             preference.setSummary(stringValue);
         }
+
         return true;
     }
 

@@ -7,13 +7,13 @@
         android:title="@string/pref_artists_rank_number_label"
         android:key="@string/pref_artists_rank_number_key"
         android:defaultValue="@string/pref_artists_rank_number_default"
-        android:inputType="text"
+        android:inputType="number"
         android:singleLine="true" />
 
     <ListPreference
         android:title="@string/pref_artists_rank_genre_label"
         android:key="@string/pref_artists_rank_genre_key"
+        android:defaultValue="@string/pref_artists_rank_genre_default"
         android:entries="@array/genres_labels"
-        android:entryValues="@array/genres_values"
-        android:defaultValue="@string/pref_artists_rank_genre_default"/>
+        android:entryValues="@array/genres_values" />
 </PreferenceScreen>
