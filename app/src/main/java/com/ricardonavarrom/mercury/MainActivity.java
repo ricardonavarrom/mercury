@@ -17,6 +17,7 @@ import com.ricardonavarrom.mercury.domain.model.Artist;
 public class MainActivity extends AppCompatActivity implements ArtistsFragment.Callback {
 
     private int artistsRankingNumber;
+    private String artistsRankingGenre;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +35,8 @@ public class MainActivity extends AppCompatActivity implements ArtistsFragment.C
             }
         });
 
-        artistsRankingNumber = getPreferredArtistRankingNumber();
+        artistsRankingNumber = getPreferredArtistsRankingNumber();
+        artistsRankingGenre = getPreferredArtistsRankingGenre();
     }
 
     @Override
@@ -47,14 +49,19 @@ public class MainActivity extends AppCompatActivity implements ArtistsFragment.C
     @Override
     protected void onResume() {
         super.onResume();
-        int actualArtistsRankingNumber = getPreferredArtistRankingNumber();
-        if (actualArtistsRankingNumber != artistsRankingNumber) {
+        int actualArtistsRankingNumber = getPreferredArtistsRankingNumber();
+        String actualArtistsRankingGenre = getPreferredArtistsRankingGenre();
+        if (actualArtistsRankingNumber != artistsRankingNumber
+                || !actualArtistsRankingGenre.equals(artistsRankingGenre)) {
             ArtistsFragment artistsFragment = (ArtistsFragment)
                     getSupportFragmentManager().findFragmentById(R.id.content_fragment_artists);
             if (artistsFragment != null) {
-                artistsFragment.onSharedPreferenceChanged(actualArtistsRankingNumber);
+                artistsFragment.onSharedPreferenceChanged(actualArtistsRankingNumber,
+                        actualArtistsRankingGenre);
             }
         }
+        artistsRankingNumber = actualArtistsRankingNumber;
+        artistsRankingGenre = actualArtistsRankingGenre;
     }
 
     @Override
@@ -72,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements ArtistsFragment.C
         return super.onOptionsItemSelected(item);
     }
 
-    public int getPreferredArtistRankingNumber() {
+    public int getPreferredArtistsRankingNumber() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         String stringArtistsRankingNumber = sharedPreferences.getString(
                 getString(R.string.pref_artists_rank_number_key),
@@ -80,5 +87,13 @@ public class MainActivity extends AppCompatActivity implements ArtistsFragment.C
         );
 
         return Integer.parseInt(stringArtistsRankingNumber);
+    }
+
+    public String getPreferredArtistsRankingGenre() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        return sharedPreferences.getString(
+                getString(R.string.pref_artists_rank_genre_key),
+                getString(R.string.pref_artists_rank_genre_default)
+        );
     }
 }

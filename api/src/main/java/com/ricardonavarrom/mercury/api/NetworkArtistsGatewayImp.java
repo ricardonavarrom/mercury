@@ -4,10 +4,11 @@ import com.ricardonavarrom.mercury.api.mapper.ApiMapper;
 import com.ricardonavarrom.mercury.api.model.EchonestArtist;
 import com.ricardonavarrom.mercury.api.model.EchonestResponse;
 import com.ricardonavarrom.mercury.api.model.SpotifyArtistsList;
-import com.ricardonavarrom.mercury.domain.model.Artist;
 import com.ricardonavarrom.mercury.domain.NetworkArtistsGateway;
+import com.ricardonavarrom.mercury.domain.model.Artist;
 
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,11 +27,14 @@ public class NetworkArtistsGatewayImp implements NetworkArtistsGateway {
         apiMapper = new ApiMapper();
     }
 
-    @Override public List<Artist> getArtists(int artistsRankingNumber) {
+    @Override public List<Artist> getArtists(int artistsRankingNumber, String artistsRankingGenre) {
         try {
+            String genresValue = artistsRankingGenre.equals("all")
+                    ? null
+                    : URLDecoder.decode(artistsRankingGenre, "UTF-8");
             EchonestResponse echonestResponse =
                   echoNestApiClient.getArtistsRanking(
-                          echonestApiKey, "json", artistsRankingNumber, "hotttnesss-desc")
+                          echonestApiKey, "json", artistsRankingNumber, genresValue)
                           .execute().body();
             List<EchonestArtist> echonestArtists = echonestResponse.getArtists().getItems();
 

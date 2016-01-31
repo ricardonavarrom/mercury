@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+    <string-array name="genres_labels">
+        <item>all genres</item>
+        <item>blues</item>
+        <item>classical</item>
+        <item>country</item>
+        <item>disco</item>
+        <item>electronic dance music</item>
+        <item>electro</item>
+        <item>electro latino</item>
+        <item>folk</item>
+        <item>funk</item>
+        <item>hip hop</item>
+        <item>house</item>
+        <item>indie pop</item>
+        <item>indie rock</item>
+        <item>jazz</item>
+        <item>latin</item>
+        <item>metal</item>
+        <item>pop</item>
+        <item>punk</item>
+        <item>reggae</item>
+        <item>rhythm and blues</item>
+        <item>rock</item>
+        <item>soul</item>
+        <item>teen pop</item>
+    </string-array>
+
+    <string-array name="genres_values">
+        <item>all</item>
+        <item>blues</item>
+        <item>classical</item>
+        <item>country</item>
+        <item>disco</item>
+        <item>edm</item>
+        <item>electro</item>
+        <item>electro latino</item>
+        <item>folk</item>
+        <item>funk</item>
+        <item>hip hop</item>
+        <item>house</item>
+        <item>indie pop</item>
+        <item>indie rock</item>
+        <item>jazz</item>
+        <item>latin</item>
+        <item>metal</item>
+        <item>pop</item>
+        <item>punk</item>
+        <item>reggae</item>
+        <item>r%26b</item>
+        <item>rock</item>
+        <item>soul</item>
+        <item>teen pop</item>
+    </string-array>
+</resources>

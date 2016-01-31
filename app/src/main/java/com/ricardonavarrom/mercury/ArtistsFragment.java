@@ -69,8 +69,9 @@ public class ArtistsFragment extends Fragment implements ArtistsView {
 
     @Override public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        int artistsRankingNumber = ((MainActivity) getActivity()).getPreferredArtistRankingNumber();
-        presenter.onUiReady(artistsRankingNumber);
+        int artistsRankingNumber = ((MainActivity) getActivity()).getPreferredArtistsRankingNumber();
+        String artistsRankingGenre = ((MainActivity) getActivity()).getPreferredArtistsRankingGenre();
+        presenter.onUiReady(artistsRankingNumber, artistsRankingGenre);
     }
 
     @Override public void onDestroy() {
@@ -78,12 +79,9 @@ public class ArtistsFragment extends Fragment implements ArtistsView {
         super.onDestroy();
     }
 
-    public void onUiReady(int actualArtistsRankingNumber) {
-        presenter.onUiReady(actualArtistsRankingNumber);
-    }
-
-    public void onSharedPreferenceChanged(int actualArtistsRankingNumber) {
-        presenter.onSharedPreferenceChanged(actualArtistsRankingNumber);
+    public void onSharedPreferenceChanged(int actualArtistsRankingNumber,
+                                          String actualArtistsRankingGenre) {
+        presenter.onSharedPreferenceChanged(actualArtistsRankingNumber, actualArtistsRankingGenre);
     }
 
     @Override

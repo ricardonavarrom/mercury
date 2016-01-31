@@ -1,7 +1,7 @@
 package com.ricardonavarrom.mercury.presentation.presenter;
 
 public interface ArtistsPresenter {
-    void onUiReady(int artistsRankingNumber);
-    void onSharedPreferenceChanged(int artistsRankingNumber);
+    void onUiReady(int artistsRankingNumber, String artistsRankingGenre);
+    void onSharedPreferenceChanged(int artistsRankingNumber, String artistsRankingGenre);
     void detachView();
 }

@@ -5,5 +5,5 @@ import com.ricardonavarrom.mercury.domain.model.Artist;
 import java.util.List;
 
 public interface NetworkArtistsGateway {
-    List<Artist> getArtists(int artistsRankingNumber);
+    List<Artist> getArtists(int artistsRankingNumber, String artisRankingGenre);
 }

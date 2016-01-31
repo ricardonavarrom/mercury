@@ -13,6 +13,7 @@ public class LoadArtistsInteractor implements Interactor {
     private NetworkArtistsGateway networkArtistsGateway;
 
     private int artistsRankingNumber;
+    private String artistsRankingGenre;
 
     public LoadArtistsInteractor(LocalArtistsGateway localArtistsGateway,
                                  NetworkArtistsGateway networkArtistsGateway) {
@@ -38,10 +39,15 @@ public class LoadArtistsInteractor implements Interactor {
         this.artistsRankingNumber = artistsRankingNumber;
     }
 
+    public void setArtistsRankingGenre(String artistsRankingGenre) {
+        this.artistsRankingGenre = artistsRankingGenre;
+    }
+
     private void loadArtists() {
         List<Artist> artistsList = localArtistsGateway.getArtists();
         if (artistsList.isEmpty()) {
-            artistsList = networkArtistsGateway.getArtists(artistsRankingNumber);
+            artistsList = networkArtistsGateway.getArtists(artistsRankingNumber,
+                    artistsRankingGenre);
             output.onArtistsLoaded(artistsList);
             localArtistsGateway.persistsArtists(artistsList);
         } else {

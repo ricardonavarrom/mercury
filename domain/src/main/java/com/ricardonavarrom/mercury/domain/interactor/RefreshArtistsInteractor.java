@@ -13,6 +13,7 @@ public class RefreshArtistsInteractor implements Interactor {
     private NetworkArtistsGateway networkArtistsGateway;
 
     private int artistsRankingNumber;
+    String artistsRankingGenre;
 
     public RefreshArtistsInteractor(LocalArtistsGateway localArtistsGateway,
                                     NetworkArtistsGateway networkArtistsGateway) {
@@ -38,8 +39,13 @@ public class RefreshArtistsInteractor implements Interactor {
         this.artistsRankingNumber = artistsRankingNumber;
     }
 
+    public void setArtistsRankingGenre(String artistsRankingGenre) {
+        this.artistsRankingGenre = artistsRankingGenre;
+    }
+
     private void refreshArtists() {
-        List<Artist> artistsList = networkArtistsGateway.getArtists(artistsRankingNumber);
+        List<Artist> artistsList = networkArtistsGateway.getArtists(artistsRankingNumber,
+                artistsRankingGenre);
         output.onArtistsRefreshed(artistsList);
         localArtistsGateway.removeAllArtists();
         localArtistsGateway.persistsArtists(artistsList);

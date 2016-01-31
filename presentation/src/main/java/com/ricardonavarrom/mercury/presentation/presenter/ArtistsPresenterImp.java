@@ -23,6 +23,7 @@ public class ArtistsPresenterImp implements ArtistsPresenter, LoadArtistsInterac
     private final MercuryViewInjector viewInjector;
 
     int artistsRankingNumber;
+    String artistsRankingGenre;
 
     public ArtistsPresenterImp(ArtistsView view, LoadArtistsInteractor loadArtistsInteractor,
                                RefreshArtistsInteractor refreshArtistsInteractor,
@@ -36,20 +37,24 @@ public class ArtistsPresenterImp implements ArtistsPresenter, LoadArtistsInterac
     }
 
     @Override
-    public void onUiReady(int artistsRankingNumber) {
+    public void onUiReady(int artistsRankingNumber, String artistsRankingGenre) {
         view.showLoading();
         this.artistsRankingNumber = artistsRankingNumber;
+        this.artistsRankingGenre = artistsRankingGenre;
         loadArtistsInteractor.setArtistsRankingNumber(artistsRankingNumber);
+        loadArtistsInteractor.setArtistsRankingGenre(artistsRankingGenre);
         loadArtistsInteractor.setOutput(this);
         interactorExecutor.execute(loadArtistsInteractor);
         view = viewInjector.inject(view);
     }
 
     @Override
-    public void onSharedPreferenceChanged(int artistsRankingNumber) {
+    public void onSharedPreferenceChanged(int artistsRankingNumber, String artistsRankingGenre) {
         view.showLoading();
         this.artistsRankingNumber = artistsRankingNumber;
+        this.artistsRankingGenre = artistsRankingGenre;
         refreshArtistsInteractor.setArtistsRankingNumber(artistsRankingNumber);
+        refreshArtistsInteractor.setArtistsRankingGenre(artistsRankingGenre);
         refreshArtistsInteractor.setOutput(this);
         interactorExecutor.execute(refreshArtistsInteractor);
         view = viewInjector.inject(view);

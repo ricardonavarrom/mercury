@@ -23,6 +23,7 @@ public class SettingsActivity extends PreferenceActivity
         addPreferencesFromResource(R.xml.pref_general);
 
         bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_artists_rank_number_key)));
+        bindPreferenceSummaryToValue(findPreference(getString(R.string.pref_artists_rank_genre_key)));
     }
 
     private void bindPreferenceSummaryToValue(Preference preference) {

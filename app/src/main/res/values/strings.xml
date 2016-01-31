@@ -6,7 +6,12 @@
     <string name="title_activity_artist">Artist detail</string>
     <string name="title_activity_settings">Settings</string>
 
-    <string name="pref_artists_rank_number_label">Artists ranking number</string>
     <string name="pref_artists_rank_number_key">artistsRankingNumber</string>
-    <string name="pref_artists_rank_number_default" translatable="false">1</string>
+    <string name="pref_artists_rank_number_label">Artists ranking number</string>
+    <string name="pref_artists_rank_number_default" translatable="false">10</string>
+
+
+    <string name="pref_artists_rank_genre_key">artistsRankingGenres</string>
+    <string name="pref_artists_rank_genre_label">Genre</string>
+    <string name="pref_artists_rank_genre_default">all</string>
 </resources>
