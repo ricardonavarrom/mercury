@@ -83,12 +83,14 @@ public class ArtistFragment extends Fragment implements ArtistView {
 
     @Override
     public void showImage(String image) {
-        Picasso
+        if (image != null) {
+            Picasso
                 .with(mImageView.getContext())
                 .load(image)
                 .placeholder(R.drawable.image_loading)
                 .error(R.mipmap.no_image)
                 .into(mImageView);
+        }
     }
 
     private void bindView(View rootView) {

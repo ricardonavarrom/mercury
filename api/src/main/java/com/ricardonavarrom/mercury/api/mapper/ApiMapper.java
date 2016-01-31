@@ -21,6 +21,18 @@ public class ApiMapper {
 
     public Artist mapSpotifyArtist(int id, int rank, SpotifyArtist spotifyArtist)
     {
+        String smallImage = spotifyArtist.getSmallImage() != null
+                ? spotifyArtist.getSmallImage().getUrl()
+                : null;
+
+        String mediumImage = spotifyArtist.getMediumImage() != null
+                ? spotifyArtist.getMediumImage().getUrl()
+                : null;
+
+        String bigImage = spotifyArtist.getBigImage() != null
+                ? spotifyArtist.getBigImage().getUrl()
+                : null;
+
         return new Artist.Builder()
                 .id(id)
                 .name(spotifyArtist.getName())
@@ -28,9 +40,9 @@ public class ApiMapper {
                 .url(spotifyArtist.getExternalUrls().getSpotify())
                 .uri(spotifyArtist.getSpotifyUri())
                 .genres(genresToString(spotifyArtist.getGenres()))
-                .smallImage(spotifyArtist.getSmallImage().getUrl())
-                .mediumImage(spotifyArtist.getMediumImage().getUrl())
-                .bigImage(spotifyArtist.getBigImage().getUrl())
+                .smallImage(smallImage)
+                .mediumImage(mediumImage)
+                .bigImage(bigImage)
                 .build();
     }
 

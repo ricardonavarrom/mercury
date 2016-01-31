@@ -21,9 +21,9 @@ public class ArtistDbHelper extends SQLiteOpenHelper {
             ArtistContract.ArtistEntry.COLUMN_URL + " TEXT NOT NULL, " +
             ArtistContract.ArtistEntry.COLUMN_URI + " TEXT NOT NULL, " +
             ArtistContract.ArtistEntry.COLUMN_GENRES + " TEXT, " +
-            ArtistContract.ArtistEntry.COLUMN_SMALL_IMAGE + " TEXT NOT NULL, " +
-            ArtistContract.ArtistEntry.COLUMN_MEDIUM_IMAGE + " TEXT NOT NULL, " +
-            ArtistContract.ArtistEntry.COLUMN_BIG_IMAGE + " TEXT NOT NULL" +
+            ArtistContract.ArtistEntry.COLUMN_SMALL_IMAGE + " TEXT, " +
+            ArtistContract.ArtistEntry.COLUMN_MEDIUM_IMAGE + " TEXT, " +
+            ArtistContract.ArtistEntry.COLUMN_BIG_IMAGE + " TEXT" +
             " );";
 
             sqLiteDatabase.execSQL(SQL_CREATE_ARTIST_TABLE);

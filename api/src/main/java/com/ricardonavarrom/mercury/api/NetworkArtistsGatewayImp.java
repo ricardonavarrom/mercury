@@ -2,6 +2,7 @@ package com.ricardonavarrom.mercury.api;
 
 import com.ricardonavarrom.mercury.api.mapper.ApiMapper;
 import com.ricardonavarrom.mercury.api.model.EchonestArtist;
+import com.ricardonavarrom.mercury.api.model.EchonestArtistForeignId;
 import com.ricardonavarrom.mercury.api.model.EchonestResponse;
 import com.ricardonavarrom.mercury.api.model.SpotifyArtistsList;
 import com.ricardonavarrom.mercury.domain.NetworkArtistsGateway;
@@ -56,12 +57,15 @@ public class NetworkArtistsGatewayImp implements NetworkArtistsGateway {
         String spotifyArtistIdsString = "";
 
         for (EchonestArtist echonestArtist : echonestArtists) {
-            String spotifyId = echonestArtist.getForeignIds().get(0).getForeignId();
-            spotifyId = spotifyId.replace("spotify:artist:", "");
+            List<EchonestArtistForeignId> echonestArtistForeignIds = echonestArtist.getForeignIds();
+            if (echonestArtistForeignIds != null) {
+                String spotifyId = echonestArtist.getForeignIds().get(0).getForeignId();
+                spotifyId = spotifyId.replace("spotify:artist:", "");
 
-            spotifyArtistIdsString = spotifyArtistIdsString == ""
-                    ? spotifyId
-                    : spotifyArtistIdsString + "," + spotifyId;
+                spotifyArtistIdsString = spotifyArtistIdsString == ""
+                        ? spotifyId
+                        : spotifyArtistIdsString + "," + spotifyId;
+            }
         }
 
         return spotifyArtistIdsString;
