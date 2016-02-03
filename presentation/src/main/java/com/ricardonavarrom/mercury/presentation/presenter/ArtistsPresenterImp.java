@@ -9,8 +9,13 @@ import com.ricardonavarrom.mercury.presentation.InteractorExecutor;
 import com.ricardonavarrom.mercury.presentation.MercuryViewInjector;
 import com.ricardonavarrom.mercury.presentation.view.ArtistsView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import me.panavtec.threaddecoratedview.views.ViewInjector;
 
@@ -64,6 +69,7 @@ public class ArtistsPresenterImp implements ArtistsPresenter, LoadArtistsInterac
 
     @Override
     public void onArtistsLoaded(List<Artist> artists) {
+        refreshArtistsRankingExpirationDate();
         view.hideLoading();
         view.hideRefreshButton();
         if (view != null) {
@@ -73,6 +79,7 @@ public class ArtistsPresenterImp implements ArtistsPresenter, LoadArtistsInterac
 
     @Override
     public void onArtistsRefreshed(List<Artist> artists) {
+        refreshArtistsRankingExpirationDate();
         view.hideLoading();
         view.hideRefreshButton();
         if (view != null) {
@@ -99,5 +106,14 @@ public class ArtistsPresenterImp implements ArtistsPresenter, LoadArtistsInterac
         view.setArtists(emptyArtistsList);
         view.showRefreshButton();
         view.showNetworkError();
+    }
+
+    private void refreshArtistsRankingExpirationDate() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        Date tomorrowDate = calendar.getTime();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd", Locale.ENGLISH);
+        String tomorrowDateString = dateFormat.format(tomorrowDate);
+        view.saveArtistsRankingExpirationDate(tomorrowDateString);
     }
 }

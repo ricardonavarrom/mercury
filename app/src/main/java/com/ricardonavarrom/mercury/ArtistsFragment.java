@@ -1,6 +1,8 @@
 package com.ricardonavarrom.mercury;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.StringRes;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -126,6 +128,16 @@ public class ArtistsFragment extends Fragment implements ArtistsView {
     @Override
     public void showNetworkError() {
         showError(R.string.error_network);
+    }
+
+    @Override
+    public void saveArtistsRankingExpirationDate(String artistRankingExpirationDateString) {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(
+                getActivity());
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(getString(R.string.pref_artists_rank_expiration_date_key),
+                artistRankingExpirationDateString);
+        editor.commit();
     }
 
     private void showError(@StringRes int error) {

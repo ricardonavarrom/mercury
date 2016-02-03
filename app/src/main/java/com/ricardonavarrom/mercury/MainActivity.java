@@ -16,6 +16,13 @@ import android.view.View;
 
 import com.ricardonavarrom.mercury.domain.model.Artist;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 public class MainActivity extends AppCompatActivity implements ArtistsFragment.Callback {
 
     private int artistsRankingNumber;
@@ -47,17 +54,20 @@ public class MainActivity extends AppCompatActivity implements ArtistsFragment.C
         super.onResume();
         int actualArtistsRankingNumber = getPreferredArtistsRankingNumber();
         String actualArtistsRankingGenre = getPreferredArtistsRankingGenre();
-        if (actualArtistsRankingNumber != artistsRankingNumber
-                || !actualArtistsRankingGenre.equals(artistsRankingGenre)) {
-            ArtistsFragment artistsFragment = (ArtistsFragment)
-                    getSupportFragmentManager().findFragmentById(R.id.content_fragment_artists);
-            if (artistsFragment != null) {
-                artistsFragment.onRefreshNecessary(actualArtistsRankingNumber,
-                        actualArtistsRankingGenre, isOnline());
+        try {
+            if (actualArtistsRankingNumber != artistsRankingNumber
+                    || !actualArtistsRankingGenre.equals(artistsRankingGenre)
+                    || artistsRankIsExpired()) {
+                ArtistsFragment artistsFragment = (ArtistsFragment)
+                        getSupportFragmentManager().findFragmentById(R.id.content_fragment_artists);
+                if (artistsFragment != null) {
+                    artistsFragment.onRefreshNecessary(actualArtistsRankingNumber,
+                            actualArtistsRankingGenre, isOnline());
+                }
             }
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
-        artistsRankingNumber = actualArtistsRankingNumber;
-        artistsRankingGenre = actualArtistsRankingGenre;
     }
 
     @Override
@@ -111,5 +121,34 @@ public class MainActivity extends AppCompatActivity implements ArtistsFragment.C
         NetworkInfo netInfo = cm.getActiveNetworkInfo();
 
         return netInfo != null && netInfo.isConnectedOrConnecting();
+    }
+
+    private boolean artistsRankIsExpired() throws ParseException {
+        Date expirationDateRank = getExpirationDateRank();
+        Date todayDate = getTodayDate();
+
+        return expirationDateRank != null && todayDate.compareTo(expirationDateRank) >= 0;
+    }
+
+    private Date getExpirationDateRank() throws ParseException {
+        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd", Locale.ENGLISH);
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String stringDate = sharedPreferences.getString(
+                getString(R.string.pref_artists_rank_expiration_date_key),
+                null
+        );
+
+        return stringDate == null
+                ? null
+                : dateFormat.parse(stringDate);
+    }
+
+    private Date getTodayDate() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+
+        return calendar.getTime();
     }
 }
