@@ -6,4 +6,6 @@
     <color name="windowBackground">#D1C4E9</color>
     <color name="navigationBarColor">#000000</color>
     <color name="colorAccent">#E040FB</color>
+
+    <color name="topArtistNumber">#FFD700</color>
 </resources>

@@ -20,6 +20,9 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.Ar
     private List<Artist> artists;
     private View.OnClickListener listener;
 
+    private static final int VIEW_TYPE_TOP_ARTIST  = 0;
+    private static final int VIEW_TYPE_NORMAL_ARTIST = 1;
+
     public static class ArtistsViewHolder extends RecyclerView.ViewHolder {
         public final TextView rankView;
         public final ImageView imageView;
@@ -33,23 +36,35 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.Ar
         }
 
         public void bind(Artist artist) {
-            int imageWidth = Integer.parseInt(imageView.getContext().getResources()
-                    .getString(R.string.item_artists_image_width));
-            int imageHeight = Integer.parseInt(imageView.getContext().getResources()
-                    .getString(R.string.item_artists_image_height));
+            int imageWidth;
+            int imageHeight;
+            String imageUrl;
 
-            rankView.setText(String.valueOf(artist.getRank()));
             nameView.setText(artist.getName());
+
+            if (artist.getRank() == 1) {
+                imageWidth = Integer.parseInt(imageView.getContext().getResources()
+                        .getString(R.string.item_artists_top_image_width));
+                imageHeight = Integer.parseInt(imageView.getContext().getResources()
+                        .getString(R.string.item_artists_top_image_height));
+                imageUrl = artist.getBigImage();
+            } else {
+                rankView.setText(String.valueOf(artist.getRank()));
+                imageWidth = Integer.parseInt(imageView.getContext().getResources()
+                        .getString(R.string.item_artists_image_width));
+                imageHeight = Integer.parseInt(imageView.getContext().getResources()
+                        .getString(R.string.item_artists_image_height));
+                imageUrl = artist.getMediumImage();
+            }
+
             if (artist.getMediumImage() == null) {
                 imageView.setImageResource(R.mipmap.no_image);
                 imageView.getLayoutParams().width = imageWidth;
                 imageView.getLayoutParams().height = imageHeight;
-
-
             } else {
                 Picasso
                     .with(imageView.getContext())
-                    .load(artist.getMediumImage())
+                    .load(imageUrl)
                     .placeholder(R.drawable.image_loading)
                     .error(R.mipmap.no_image)
                     .transform(new CropTransformation(
@@ -67,9 +82,20 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.Ar
     }
 
     @Override
+    public int getItemViewType(int position) {
+        return position == 0
+                ? VIEW_TYPE_TOP_ARTIST
+                : VIEW_TYPE_NORMAL_ARTIST;
+    }
+
+    @Override
     public ArtistsViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
+        int layoutResource = viewType == VIEW_TYPE_TOP_ARTIST
+                ? R.layout.top_item_artist
+                : R.layout.item_artists;
+
         View item = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.item_artists, viewGroup, false);
+                .inflate(layoutResource, viewGroup, false);
 
         item.setOnClickListener(this);
         ArtistsViewHolder viewHolder = new ArtistsViewHolder(item);
