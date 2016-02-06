@@ -36,8 +36,8 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.Ar
             nameView.setText(artist.getName());
             if (artist.getMediumImage() == null) {
                 imageView.setImageResource(R.mipmap.no_image);
-                imageView.getLayoutParams().width = 200;
-                imageView.getLayoutParams().height = 200;
+                imageView.getLayoutParams().width = 150;
+                imageView.getLayoutParams().height = 150;
 
             } else {
                 Picasso
