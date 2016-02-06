@@ -4,7 +4,7 @@
     <string name="action_refresh_artists_ranking">Refrescar el ranking</string>
     <string name="error_load_artists">Error cargando artistas</string>
     <string name="error_pref_artists_rank_number">Valor fuera de rango (1-50)</string>
-    <string name="error_network">Es necesaria la conexión a red</string>
+    <string name="error_network">Es necesario conexión a red</string>
     <string name="title_activity_artist">Detalle del artista</string>
     <string name="title_activity_settings">Preferencias</string>
 
