@@ -25,4 +25,8 @@
     <string name="item_artists_image_height" translatable="false">150</string>
     <string name="item_artists_top_image_width" translatable="false">500</string>
     <string name="item_artists_top_image_height" translatable="false">500</string>
+
+    <string name="echonest_data_message_all_genres">Información proporcionada por Echo Nest para todos los géneros</string>
+    <string name="echonest_data_message">Información proporcionada por Echo Nest para el género</string>
+    <string name="last_data_update_date">Fecha de última actualización</string>
 </resources>
