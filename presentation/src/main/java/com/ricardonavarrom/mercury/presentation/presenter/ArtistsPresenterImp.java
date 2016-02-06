@@ -71,7 +71,7 @@ public class ArtistsPresenterImp implements ArtistsPresenter, LoadArtistsInterac
     public void onArtistsLoaded(List<Artist> artists) {
         refreshArtistsRankingExpirationDate();
         view.hideLoading();
-        view.hideRefreshButton();
+        view.hideRefreshRankingView();
         if (view != null) {
             view.setArtists(artists);
         }
@@ -81,7 +81,7 @@ public class ArtistsPresenterImp implements ArtistsPresenter, LoadArtistsInterac
     public void onArtistsRefreshed(List<Artist> artists) {
         refreshArtistsRankingExpirationDate();
         view.hideLoading();
-        view.hideRefreshButton();
+        view.hideRefreshRankingView();
         if (view != null) {
             view.setArtists(artists);
         }
@@ -104,7 +104,7 @@ public class ArtistsPresenterImp implements ArtistsPresenter, LoadArtistsInterac
         view.hideLoading();
         List<Artist> emptyArtistsList = new ArrayList<>();
         view.setArtists(emptyArtistsList);
-        view.showRefreshButton();
+        view.showRefreshRankingView();
         view.showNetworkError();
     }
 

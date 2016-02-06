@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/refresh_ranking_view"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingTop="20dp"
+    android:paddingBottom="20dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:gravity="center_vertical|center_horizontal"
+    android:layout_gravity="center_vertical|center_horizontal"
+    android:visibility="gone">
+
+    <ImageView
+        android:id="@+id/refresh_ranking_view_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/refresh_view_background"
+        android:layout_marginBottom="20dp" />
+
+    <Button xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/refresh_ranking_view_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/action_refresh_artists_ranking"
+        android:textColor="@color/textColorPrimary"
+        android:background="@color/colorAccent"
+        android:padding="10dp"
+        android:onClick="refreshArtistsRanking"/>
+
+</LinearLayout>

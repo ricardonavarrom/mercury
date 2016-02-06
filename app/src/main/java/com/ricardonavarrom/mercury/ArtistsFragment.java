@@ -10,7 +10,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -33,7 +33,7 @@ public class ArtistsFragment extends Fragment implements ArtistsView {
     private ArtistListAdapter adapter;
     private ArtistsPresenter presenter;
     private ProgressBar progressBar;
-    private Button refreshButton;
+    private LinearLayout refreshRankingView;
 
     public interface Callback {
         void onItemSelected(Artist artist);
@@ -69,7 +69,7 @@ public class ArtistsFragment extends Fragment implements ArtistsView {
         recyclerView.setAdapter(adapter);
 
         progressBar = (ProgressBar) rootView.findViewById(R.id.artists_progress_bar);
-        refreshButton = (Button) rootView.findViewById(R.id.refresh_button);
+        refreshRankingView = (LinearLayout) rootView.findViewById(R.id.refresh_ranking_view);
 
         return rootView;
     }
@@ -113,13 +113,13 @@ public class ArtistsFragment extends Fragment implements ArtistsView {
     }
 
     @Override
-    public void showRefreshButton() {
-        refreshButton.setVisibility(VISIBLE);
+    public void showRefreshRankingView() {
+        refreshRankingView.setVisibility(VISIBLE);
     }
 
     @Override
-    public void hideRefreshButton() {
-        refreshButton.setVisibility(GONE);
+    public void hideRefreshRankingView() {
+        refreshRankingView.setVisibility(GONE);
     }
 
     @Override
