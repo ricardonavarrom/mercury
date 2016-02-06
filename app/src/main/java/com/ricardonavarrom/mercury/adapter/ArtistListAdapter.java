@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.ricardonavarrom.mercury.R;
 import com.ricardonavarrom.mercury.domain.model.Artist;
+import com.ricardonavarrom.mercury.transformation.CropTransformation;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -32,12 +33,18 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.Ar
         }
 
         public void bind(Artist artist) {
+            int imageWidth = Integer.parseInt(imageView.getContext().getResources()
+                    .getString(R.string.item_artists_image_width));
+            int imageHeight = Integer.parseInt(imageView.getContext().getResources()
+                    .getString(R.string.item_artists_image_height));
+
             rankView.setText(String.valueOf(artist.getRank()));
             nameView.setText(artist.getName());
             if (artist.getMediumImage() == null) {
                 imageView.setImageResource(R.mipmap.no_image);
-                imageView.getLayoutParams().width = 150;
-                imageView.getLayoutParams().height = 150;
+                imageView.getLayoutParams().width = imageWidth;
+                imageView.getLayoutParams().height = imageHeight;
+
 
             } else {
                 Picasso
@@ -45,8 +52,11 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.Ar
                     .load(artist.getMediumImage())
                     .placeholder(R.drawable.image_loading)
                     .error(R.mipmap.no_image)
-                    .resizeDimen(R.dimen.item_artists_image_width, R.dimen.item_artists_image_height)
-                    .centerCrop()
+                    .transform(new CropTransformation(
+                            imageWidth,
+                            imageHeight,
+                            CropTransformation.CropType.TOP
+                    ))
                     .into(imageView);
             }
         }

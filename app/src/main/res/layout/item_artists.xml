@@ -5,21 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center_vertical"
-    android:orientation="horizontal" >
+    android:orientation="horizontal"
+    android:paddingTop="10dp"
+    android:paddingBottom="8dp" >
 
     <TextView
         android:id="@+id/item_artists_rank"
         android:layout_width="60dp"
         android:layout_height="match_parent"
         android:textStyle="bold"
-        android:textSize="50sp"
-        android:gravity="center"
-        android:layout_marginRight="8dp"/>
+        android:textSize="40sp"
+        android:gravity="center" />
 
     <ImageView
         android:id="@+id/item_artists_image"
         android:layout_width="60dp"
         android:layout_height="match_parent"
+        android:gravity="center"
         android:layout_marginRight="8dp"/>
 
     <TextView

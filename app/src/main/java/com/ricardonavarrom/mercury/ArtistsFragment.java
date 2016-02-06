@@ -15,6 +15,7 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.ricardonavarrom.mercury.adapter.ArtistListAdapter;
+import com.ricardonavarrom.mercury.decoration.DividerItemDecoration;
 import com.ricardonavarrom.mercury.dependency.PresenterFactory;
 import com.ricardonavarrom.mercury.domain.model.Artist;
 import com.ricardonavarrom.mercury.presentation.presenter.ArtistsPresenter;
@@ -61,6 +62,7 @@ public class ArtistsFragment extends Fragment implements ArtistsView {
 
         recyclerView = (RecyclerView) rootView.findViewById(R.id.artists_recycler_view);
         recyclerView.setHasFixedSize(true);
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), null));
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(linearLayoutManager);
