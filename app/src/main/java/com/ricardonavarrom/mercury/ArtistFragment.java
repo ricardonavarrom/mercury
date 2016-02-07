@@ -15,20 +15,25 @@ import com.squareup.picasso.Picasso;
 
 public class ArtistFragment extends Fragment implements ArtistView {
 
-    private TextView mRankView;
-    private TextView mNameView;
-    private TextView mUrlView;
-    private TextView mUriView;
-    private TextView mGenresView;
-    private ImageView mImageView;
+    private TextView rankView;
+    private TextView rankGenreView;
+    private TextView rankDateView;
+    private TextView nameView;
+    private TextView genresView;
+    private ImageView imageView;
 
     private ArtistPresenter presenter;
     private int artistId;
+    private String genreRankString;
+    private String rankLastUpdateDateString;
 
-    public static ArtistFragment newInstance(int artistId) {
+    public static ArtistFragment newInstance(int artistId, String genreRankString,
+                                             String rankLastUpdateDateString) {
         ArtistFragment artistFragment = new ArtistFragment();
         Bundle arguments = new Bundle();
         arguments.putInt("artistId", artistId);
+        arguments.putString("genreRankString", genreRankString);
+        arguments.putString("rankLastUpdateDateString", rankLastUpdateDateString);
         artistFragment.setArguments(arguments);
 
         return artistFragment;
@@ -62,50 +67,54 @@ public class ArtistFragment extends Fragment implements ArtistView {
     }
 
     @Override public void showRank(int rank) {
-        mRankView.setText(Integer.toString(rank));
+        rankView.setText(Integer.toString(rank));
+    }
+
+    @Override public void showRankGenre(String rankGenre) {
+        rankView.setText(rankGenre);
+    }
+
+    @Override public void showRankDate(String rankDate) {
+        rankView.setText(rankDate);
     }
 
     @Override public void showName(String name) {
-        mNameView.setText(name);
-    }
-
-    @Override public void showUrl(String url) {
-        mUrlView.setText(url);
-    }
-
-    @Override public void showUri(String uri) {
-        mUriView.setText(uri);
+        nameView.setText(name);
     }
 
     @Override public void showGenres(String genres) {
-        mGenresView.setText(genres);
+        genresView.setText(genres);
     }
 
     @Override
     public void showImage(String image) {
         if (image != null) {
             Picasso
-                .with(mImageView.getContext())
+                .with(imageView.getContext())
                 .load(image)
                 .placeholder(R.drawable.image_loading)
                 .error(R.mipmap.no_image)
-                .into(mImageView);
+                .into(imageView);
         }
     }
 
     private void bindView(View rootView) {
-        mRankView = (TextView) rootView.findViewById(R.id.rank_artist_detail);
-        mNameView = (TextView) rootView.findViewById(R.id.name_artist_detail);
-        mUrlView = (TextView) rootView.findViewById(R.id.url_artist_detail);
-        mUriView = (TextView) rootView.findViewById(R.id.uri_artist_detail);
-        mGenresView = (TextView) rootView.findViewById(R.id.genres_artist_detail);
-        mImageView = (ImageView) rootView.findViewById(R.id.image_artist_detail);
+        rankView = (TextView) rootView.findViewById(R.id.rank_artist_detail);
+        rankGenreView = (TextView) rootView.findViewById(R.id.rank_genre_artist_detail);
+        rankGenreView.setText(genreRankString);
+        rankDateView = (TextView) rootView.findViewById(R.id.rank_date_artist_detail);
+        rankDateView.setText(rankLastUpdateDateString);
+        nameView = (TextView) rootView.findViewById(R.id.name_artist_detail);
+        genresView = (TextView) rootView.findViewById(R.id.genres_artist_detail);
+        imageView = (ImageView) rootView.findViewById(R.id.image_artist_detail);
     }
 
     private void getArgments() {
         Bundle arguments = getArguments();
         if (arguments != null) {
             artistId = arguments.getInt("artistId");
+            genreRankString = arguments.getString("genreRankString");
+            rankLastUpdateDateString = arguments.getString("rankLastUpdateDateString");
         }
     }
 }

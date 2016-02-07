@@ -8,16 +8,3 @@ xmlns:app="http://schemas.android.com/apk/res-auto">
         app:showAsAction="always"
         app:actionProviderClass="android.support.v7.widget.ShareActionProvider" />
 </menu>
-
-    <!--<?xml version="1.0" encoding="utf-8"?>-->
-    <!--<menu-->
-    <!--xmlns:android="http://schemas.android.com/apk/res/android"-->
-    <!--xmlns:tools="http://schemas.android.com/tools"-->
-    <!--tools:context="com.ricardonavarrom.mercury.ArtistActivity">-->
-
-    <!--<item-->
-    <!--android:id="@+id/artist_menu_item_share"-->
-    <!--android:title="@string/action_share"-->
-    <!--android:showAsAction="ifRoom"-->
-    <!--android:actionProviderClass="android.widget.ShareActionProvider" />-->
-    <!--</menu>-->

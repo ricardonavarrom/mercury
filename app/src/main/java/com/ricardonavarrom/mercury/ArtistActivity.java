@@ -11,7 +11,6 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,21 +22,27 @@ public class ArtistActivity extends AppCompatActivity {
     private int artistId;
     private String artistUrl;
     private String artistUri;
+    private String genreRankString;
+    private String rankLastUpdateDateString;
     private String artistShareString;
+
 
     private ShareActionProvider shareActionProvider;
 
-    public static void startActivity(Context context, Artist artist, String genre) {
+    public static void startActivity(Context context, Artist artist, String genreRankString,
+                                     String rankLastUpdateDateString) {
         Intent intent = new Intent(context, ArtistActivity.class);
         intent.putExtra("artistId", artist.getId());
         intent.putExtra("artistUrl", artist.getUrl());
         intent.putExtra("artistUri", artist.getUri());
+        intent.putExtra("genreRankString", genreRankString);
+        intent.putExtra("rankLastUpdateDateString", rankLastUpdateDateString);
 
         String artistShareString = context.getString(
                 R.string.artist_share_string,
                 artist.getName(),
                 artist.getRank(),
-                genre
+                genreRankString
         );
         intent.putExtra("artistShareString", artistShareString);
 
@@ -64,8 +69,11 @@ public class ArtistActivity extends AppCompatActivity {
             artistId = getIntent().getIntExtra("artistId", 0);
             artistUrl = getIntent().getStringExtra("artistUrl");
             artistUri = getIntent().getStringExtra("artistUri");
+            genreRankString = getIntent().getStringExtra("genreRankString");
+            rankLastUpdateDateString = getIntent().getStringExtra("rankLastUpdateDateString");
             artistShareString = getIntent().getStringExtra("artistShareString");
-            ArtistFragment artistFragment = ArtistFragment.newInstance(artistId);
+            ArtistFragment artistFragment = ArtistFragment.newInstance(artistId, genreRankString,
+                    rankLastUpdateDateString);
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(R.id.content_fragment_artist_container, artistFragment)
@@ -111,7 +119,6 @@ public class ArtistActivity extends AppCompatActivity {
     }
 
     private Intent createShareArtistIntent() {
-        Log.v("*********", artistShareString);
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
         shareIntent.setType("text/plain");
