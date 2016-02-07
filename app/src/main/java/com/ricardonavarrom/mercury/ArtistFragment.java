@@ -83,7 +83,7 @@ public class ArtistFragment extends Fragment implements ArtistView {
     }
 
     @Override public void showGenres(String genres) {
-        genresView.setText(genres);
+        genresView.setText(getText(R.string.artist_genres) + ": " + genres);
     }
 
     @Override
@@ -100,13 +100,14 @@ public class ArtistFragment extends Fragment implements ArtistView {
 
     private void bindView(View rootView) {
         rankView = (TextView) rootView.findViewById(R.id.rank_artist_detail);
-        rankGenreView = (TextView) rootView.findViewById(R.id.rank_genre_artist_detail);
-        rankGenreView.setText(genreRankString);
-        rankDateView = (TextView) rootView.findViewById(R.id.rank_date_artist_detail);
-        rankDateView.setText(rankLastUpdateDateString);
         nameView = (TextView) rootView.findViewById(R.id.name_artist_detail);
-        genresView = (TextView) rootView.findViewById(R.id.genres_artist_detail);
         imageView = (ImageView) rootView.findViewById(R.id.image_artist_detail);
+
+        rankGenreView = (TextView) rootView.findViewById(R.id.rank_genre_artist_detail);
+        rankGenreView.setText(getText(R.string.selected_genre) + ": " + genreRankString);
+        rankDateView = (TextView) rootView.findViewById(R.id.rank_date_artist_detail);
+        rankDateView.setText(getText(R.string.last_update_date) + ": " + rankLastUpdateDateString);
+        genresView = (TextView) rootView.findViewById(R.id.genres_artist_detail);
     }
 
     private void getArgments() {

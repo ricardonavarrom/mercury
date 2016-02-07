@@ -5,40 +5,71 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="70dp"
+    android:paddingTop="50dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:paddingBottom="16dp"
+    android:gravity="center|top"
     tools:context=".ArtistActivity">
 
-    <TextView
-        android:id="@+id/rank_artist_detail"
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"/>
+        android:gravity="center">
 
-    <TextView
-        android:id="@+id/rank_genre_artist_detail"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"/>
+        <TextView
+            android:id="@+id/rank_artist_detail"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:textStyle="bold"
+            android:textSize="90sp"
+            android:layout_marginRight="10dp" />
 
-    <TextView
-        android:id="@+id/rank_date_artist_detail"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"/>
+        <LinearLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/rank_genre_artist_detail"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/rank_date_artist_detail"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
     <TextView
         android:id="@+id/name_artist_detail"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"/>
+        android:layout_width="wrap_content"
+        android:textColor="@color/colorPrimary"
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:layout_marginBottom="10dp"/>
+
+    <ImageView
+        android:id="@+id/image_artist_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"/>
 
     <TextView
         android:id="@+id/genres_artist_detail"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"/>
-
-    <ImageView
-        android:id="@+id/image_artist_detail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
 </LinearLayout>

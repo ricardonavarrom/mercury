@@ -32,4 +32,8 @@
     <string name="echonest_data_message">Información proporcionada por Echo Nest para el género %1$s. Fecha de última actualización: %2$s</string>
 
     <string name="artist_share_string">%1$s está en el puesto número %2$d del rankgin de Mercury para el género %3$s. #Mercury</string>
+
+    <string name="selected_genre">Género</string>
+    <string name="artist_genres">Géneros</string>
+    <string name="last_update_date">Actualizado</string>
 </resources>

@@ -57,7 +57,9 @@ public class ArtistPresenterImp implements ArtistPresenter, LoadArtistInteractor
     private void updateView(Artist artist) {
         view.showRank(artist.getRank());
         view.showName(artist.getName());
-        view.showGenres(artist.getGenres());
         view.showImage(artist.getMediumImage());
+        if (artist.getGenres() != null) {
+            view.showGenres(artist.getGenres());
+        }
     }
 }
