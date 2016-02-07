@@ -7,8 +7,13 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.ricardonavarrom.mercury.domain.model.Artist;
@@ -18,12 +23,24 @@ public class ArtistActivity extends AppCompatActivity {
     private int artistId;
     private String artistUrl;
     private String artistUri;
+    private String artistShareString;
 
-    public static void startActivity(Context context, Artist artist) {
+    private ShareActionProvider shareActionProvider;
+
+    public static void startActivity(Context context, Artist artist, String genre) {
         Intent intent = new Intent(context, ArtistActivity.class);
         intent.putExtra("artistId", artist.getId());
         intent.putExtra("artistUrl", artist.getUrl());
         intent.putExtra("artistUri", artist.getUri());
+
+        String artistShareString = context.getString(
+                R.string.artist_share_string,
+                artist.getName(),
+                artist.getRank(),
+                genre
+        );
+        intent.putExtra("artistShareString", artistShareString);
+
         context.startActivity(intent);
     }
 
@@ -47,6 +64,7 @@ public class ArtistActivity extends AppCompatActivity {
             artistId = getIntent().getIntExtra("artistId", 0);
             artistUrl = getIntent().getStringExtra("artistUrl");
             artistUri = getIntent().getStringExtra("artistUri");
+            artistShareString = getIntent().getStringExtra("artistShareString");
             ArtistFragment artistFragment = ArtistFragment.newInstance(artistId);
             getSupportFragmentManager()
                     .beginTransaction()
@@ -58,6 +76,19 @@ public class ArtistActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_artist, menu);
+
+        MenuItem menuItem = menu.findItem(R.id.action_share);
+        shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
+        if (artistShareString != null) {
+            shareActionProvider.setShareIntent(createShareArtistIntent());
+        }
+
+        return true;
     }
 
     private boolean isPackageInstalled(String packagename, Context context) {
@@ -77,5 +108,14 @@ public class ArtistActivity extends AppCompatActivity {
                 : artistUrl;
         intent.setData(Uri.parse(intentData));
         startActivity(intent);
+    }
+
+    private Intent createShareArtistIntent() {
+        Log.v("*********", artistShareString);
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, artistShareString);
+        return shareIntent;
     }
 }

@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name" translatable="false">Mercury</string>
     <string name="action_settings">Preferencias</string>
+    <string name="action_share">Compartir</string>
     <string name="action_refresh_artists_ranking">Refrescar el ranking</string>
     <string name="error_load_artists">Error cargando artistas</string>
     <string name="error_pref_artists_rank_number">Valor fuera de rango (1-50)</string>
@@ -29,4 +30,6 @@
     <string name="echonest_data_message_all_genres">Información proporcionada por Echo Nest para todos los géneros</string>
     <string name="echonest_data_message">Información proporcionada por Echo Nest para el género</string>
     <string name="last_data_update_date">Fecha de última actualización</string>
+
+    <string name="artist_share_string">%1$s está en el puesto número %2$d del rankgin de Mercury para el género %3$s. #Mercury</string>
 </resources>

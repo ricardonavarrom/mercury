@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements ArtistsFragment.C
 
     @Override
     public void onItemSelected(Artist artist) {
-        ArtistActivity.startActivity(this, artist);
+        ArtistActivity.startActivity(this, artist, getPreferredArtistsRankingGenre());
     }
 
     @Override public boolean onOptionsItemSelected(MenuItem item) {
