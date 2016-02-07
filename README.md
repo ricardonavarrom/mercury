@@ -28,7 +28,7 @@ mercury (DOCUMENTACIÓN EN CONSTRUCCIÓN)
 - Proceso de instalación
 
 ## Algunos screenshot
-<img src="https://github.com/ricardonavarrom/mercury/tree/master/doc/screenshot1.png" />
+<img src="https://github.com/ricardonavarrom/mercury/blob/master/doc/screenshot1.png" />
 
 ### Autor
 
