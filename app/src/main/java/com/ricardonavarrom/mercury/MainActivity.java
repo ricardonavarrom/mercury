@@ -78,8 +78,14 @@ public class MainActivity extends AppCompatActivity implements ArtistsFragment.C
 
     @Override
     public void onItemSelected(Artist artist) {
+        String genreRankString = getPreferredArtistsRankingGenre();
+        if (genreRankString.equals("all"))
+            genreRankString = getString(R.string.pref_artists_rank_genre_default_name);
+        if (genreRankString.equals("r%26b"))
+            genreRankString = "rhythm and blues";
+
         try {
-            ArtistActivity.startActivity(this, artist, getPreferredArtistsRankingGenre(),
+            ArtistActivity.startActivity(this, artist, genreRankString,
                     getLastRankUpdateDateString());
         } catch (ParseException e) {
             e.printStackTrace();
@@ -173,11 +179,28 @@ public class MainActivity extends AppCompatActivity implements ArtistsFragment.C
 
     private void runFloatingActionButtonAction(View view) throws ParseException {
         String actualGenre = getPreferredArtistsRankingGenre();
-        String snackBarText = actualGenre.equals(getString(R.string.pref_artists_rank_genre_default))
-                ? getString(R.string.echonest_data_message_all_genres)
-                : getString(R.string.echonest_data_message) + ": " + getPreferredArtistsRankingGenre();
-        snackBarText = snackBarText.concat(". " + getString(R.string.last_data_update_date)
-                + ": " + getLastRankUpdateDateString());
+        String snackBarText;
+
+        if (actualGenre.equals(getString(R.string.pref_artists_rank_genre_default))) {
+            snackBarText = getString(
+                    R.string.echonest_data_message_all_genres,
+                    getLastRankUpdateDateString()
+            );
+        } else {
+            if (actualGenre.equals("r%26b")) {
+                snackBarText = getString(
+                        R.string.echonest_data_message,
+                        "r&b",
+                        getLastRankUpdateDateString()
+                );
+            } else {
+                snackBarText = getString(
+                        R.string.echonest_data_message,
+                        actualGenre,
+                        getLastRankUpdateDateString()
+                );
+            }
+        }
 
         Snackbar.make(view, snackBarText, Snackbar.LENGTH_LONG).show();
     }

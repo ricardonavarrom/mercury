@@ -19,6 +19,7 @@
     <string name="pref_artists_rank_genre_key" translatable="false">artistsRankingGenres</string>
     <string name="pref_artists_rank_genre_label">Género</string>
     <string name="pref_artists_rank_genre_default" translatable="false">all</string>
+    <string name="pref_artists_rank_genre_default_name" translatable="false">todos los géneros</string>
 
     <string name="pref_artists_rank_expiration_date_key" translatable="false">artistRankingExpirationDate</string>
 
@@ -27,9 +28,8 @@
     <string name="item_artists_top_image_width" translatable="false">500</string>
     <string name="item_artists_top_image_height" translatable="false">500</string>
 
-    <string name="echonest_data_message_all_genres">Información proporcionada por Echo Nest para todos los géneros</string>
-    <string name="echonest_data_message">Información proporcionada por Echo Nest para el género</string>
-    <string name="last_data_update_date">Fecha de última actualización</string>
+    <string name="echonest_data_message_all_genres">Información proporcionada por Echo Nest para todos los géneros. Fecha de última actualización: %1$s</string>
+    <string name="echonest_data_message">Información proporcionada por Echo Nest para el género %1$s. Fecha de última actualización: %2$s</string>
 
     <string name="artist_share_string">%1$s está en el puesto número %2$d del rankgin de Mercury para el género %3$s. #Mercury</string>
 </resources>
