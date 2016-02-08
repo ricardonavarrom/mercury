@@ -92,7 +92,7 @@ public class ArtistFragment extends Fragment implements ArtistView {
             Picasso
                 .with(imageView.getContext())
                 .load(image)
-                .placeholder(R.drawable.image_loading)
+                .placeholder(R.mipmap.loading)
                 .error(R.mipmap.no_image)
                 .into(imageView);
         }

@@ -65,7 +65,7 @@ public class ArtistListAdapter extends RecyclerView.Adapter<ArtistListAdapter.Ar
                 Picasso
                     .with(imageView.getContext())
                     .load(imageUrl)
-                    .placeholder(R.drawable.image_loading)
+                    .placeholder(R.mipmap.loading)
                     .error(R.mipmap.no_image)
                     .transform(new CropTransformation(
                             imageWidth,
