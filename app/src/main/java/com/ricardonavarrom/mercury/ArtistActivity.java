@@ -38,12 +38,21 @@ public class ArtistActivity extends AppCompatActivity {
         intent.putExtra("genreRankString", genreRankString);
         intent.putExtra("rankLastUpdateDateString", rankLastUpdateDateString);
 
-        String artistShareString = context.getString(
-                R.string.artist_share_string,
-                artist.getName(),
-                artist.getRank(),
-                genreRankString
-        );
+        String artistShareString;
+        if (genreRankString == context.getString(R.string.pref_artists_rank_genre_default_name)) {
+            artistShareString = context.getString(
+                    R.string.artist_share_string_all_genres,
+                    artist.getName(),
+                    artist.getRank()
+            );
+        } else {
+            artistShareString = context.getString(
+                    R.string.artist_share_string,
+                    artist.getName(),
+                    artist.getRank(),
+                    genreRankString
+            );
+        }
         intent.putExtra("artistShareString", artistShareString);
 
         context.startActivity(intent);
