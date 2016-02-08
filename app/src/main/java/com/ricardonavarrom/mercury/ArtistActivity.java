@@ -65,13 +65,13 @@ public class ArtistActivity extends AppCompatActivity {
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        artistId = getIntent().getIntExtra("artistId", 0);
+        artistUrl = getIntent().getStringExtra("artistUrl");
+        artistUri = getIntent().getStringExtra("artistUri");
+        genreRankString = getIntent().getStringExtra("genreRankString");
+        rankLastUpdateDateString = getIntent().getStringExtra("rankLastUpdateDateString");
+        artistShareString = getIntent().getStringExtra("artistShareString");
         if (savedInstanceState == null) {
-            artistId = getIntent().getIntExtra("artistId", 0);
-            artistUrl = getIntent().getStringExtra("artistUrl");
-            artistUri = getIntent().getStringExtra("artistUri");
-            genreRankString = getIntent().getStringExtra("genreRankString");
-            rankLastUpdateDateString = getIntent().getStringExtra("rankLastUpdateDateString");
-            artistShareString = getIntent().getStringExtra("artistShareString");
             ArtistFragment artistFragment = ArtistFragment.newInstance(artistId, genreRankString,
                     rankLastUpdateDateString);
             getSupportFragmentManager()
