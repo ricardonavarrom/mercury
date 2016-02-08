@@ -113,6 +113,16 @@ public class ArtistsFragment extends Fragment implements ArtistsView {
     }
 
     @Override
+    public void showRecyclerView() {
+        recyclerView.setVisibility(VISIBLE);
+    }
+
+    @Override
+    public void hideRecyclerView() {
+        recyclerView.setVisibility(GONE);
+    }
+
+    @Override
     public void showRefreshRankingView() {
         refreshRankingView.setVisibility(VISIBLE);
     }

@@ -42,6 +42,7 @@ public class ArtistsPresenterImp implements ArtistsPresenter, LoadArtistsInterac
     @Override
     public void onUiReady(int artistsRankingNumber, String artistsRankingGenre, boolean isOnline) {
         view.showLoading();
+        view.hideRecyclerView();
         loadArtistsInteractor.setArtistsRankingNumber(artistsRankingNumber);
         loadArtistsInteractor.setArtistsRankingGenre(artistsRankingGenre);
         loadArtistsInteractor.setIsOnline(isOnline);
@@ -54,6 +55,7 @@ public class ArtistsPresenterImp implements ArtistsPresenter, LoadArtistsInterac
     public void onRefreshNecessary(int artistsRankingNumber, String artistsRankingGenre,
                                    boolean isOnline) {
         view.showLoading();
+        view.hideRecyclerView();
         refreshArtistsInteractor.setArtistsRankingNumber(artistsRankingNumber);
         refreshArtistsInteractor.setArtistsRankingGenre(artistsRankingGenre);
         refreshArtistsInteractor.setIsOnline(isOnline);
@@ -71,6 +73,7 @@ public class ArtistsPresenterImp implements ArtistsPresenter, LoadArtistsInterac
     public void onArtistsLoaded(List<Artist> artists) {
         refreshArtistsRankingExpirationDate();
         view.hideLoading();
+        view.showRecyclerView();
         view.hideRefreshRankingView();
         if (view != null) {
             view.setArtists(artists);
@@ -82,6 +85,7 @@ public class ArtistsPresenterImp implements ArtistsPresenter, LoadArtistsInterac
         refreshArtistsRankingExpirationDate();
         view.hideLoading();
         view.hideRefreshRankingView();
+        view.showRecyclerView();
         if (view != null) {
             view.setArtists(artists);
         }
@@ -90,18 +94,21 @@ public class ArtistsPresenterImp implements ArtistsPresenter, LoadArtistsInterac
     @Override
     public void onLoadArtistsError() {
         view.hideLoading();
+        view.showRecyclerView();
         view.showLoadArtistsError();
     }
 
     @Override
     public void onRefreshArtistsError() {
         view.hideLoading();
+        view.showRecyclerView();
         view.showLoadArtistsError();
     }
 
     @Override
     public void onNetworkError() {
         view.hideLoading();
+        view.showRecyclerView();
         List<Artist> emptyArtistsList = new ArrayList<>();
         view.setArtists(emptyArtistsList);
         view.showRefreshRankingView();

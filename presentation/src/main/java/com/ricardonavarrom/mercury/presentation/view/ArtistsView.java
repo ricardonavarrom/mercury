@@ -6,6 +6,8 @@ import me.panavtec.threaddecoratedview.views.qualifiers.ThreadDecoratedView;
 
 @ThreadDecoratedView public interface ArtistsView {
     void setArtists(List<Artist> artists);
+    void showRecyclerView();
+    void hideRecyclerView();
     void showLoading();
     void hideLoading();
     void showRefreshRankingView();
