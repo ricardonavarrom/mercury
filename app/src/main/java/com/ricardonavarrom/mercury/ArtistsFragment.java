@@ -152,6 +152,15 @@ public class ArtistsFragment extends Fragment implements ArtistsView {
         editor.commit();
     }
 
+    @Override
+    public void resetPreferredArtistsRankingOptionsChanged() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(
+                getActivity());
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt(getString(R.string.pref_artists_rank_settings_changed_key), 0);
+        editor.commit();
+    }
+
     private void showError(@StringRes int error) {
         Toast.makeText(getActivity(), getString(error), Toast.LENGTH_LONG).show();
     }

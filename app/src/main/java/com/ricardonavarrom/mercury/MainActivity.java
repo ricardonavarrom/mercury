@@ -25,10 +25,12 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
-public class MainActivity extends AppCompatActivity implements ArtistsFragment.Callback {
+public class MainActivity extends AppCompatActivity implements ArtistsFragment.Callback,
+        SharedPreferences.OnSharedPreferenceChangeListener {
 
     private int artistsRankingNumber;
     private String artistsRankingGenre;
+    private boolean rankSettingsChanged;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,12 +53,17 @@ public class MainActivity extends AppCompatActivity implements ArtistsFragment.C
 
         artistsRankingNumber = getPreferredArtistsRankingNumber();
         artistsRankingGenre = getPreferredArtistsRankingGenre();
+        rankSettingsChanged = getPreferredArtistsRankingOptionsChanged();
 
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowHomeEnabled(true);
         actionBar.setLogo(R.mipmap.ic_logo);
         actionBar.setDisplayUseLogoEnabled(true);
         actionBar.setTitle(null);
+
+        SharedPreferences prefs = PreferenceManager
+                .getDefaultSharedPreferences(this);
+        prefs.registerOnSharedPreferenceChangeListener(this);
     }
 
     @Override
@@ -69,13 +76,16 @@ public class MainActivity extends AppCompatActivity implements ArtistsFragment.C
     @Override
     protected void onResume() {
         super.onResume();
+        artistsRankingNumber = getPreferredArtistsRankingNumber();
+        artistsRankingGenre = getPreferredArtistsRankingGenre();
+        rankSettingsChanged = getPreferredArtistsRankingOptionsChanged();
         try {
             if (isNecessaryRefreshRanking()) {
                 ArtistsFragment artistsFragment = (ArtistsFragment)
                         getSupportFragmentManager().findFragmentById(R.id.content_fragment_artists);
                 if (artistsFragment != null) {
-                    artistsFragment.onRefreshNecessary(getPreferredArtistsRankingNumber(),
-                            getPreferredArtistsRankingGenre(), isOnline());
+                    artistsFragment.onRefreshNecessary(artistsRankingNumber, artistsRankingGenre,
+                            isOnline());
                 }
             }
         } catch (ParseException e) {
@@ -127,15 +137,22 @@ public class MainActivity extends AppCompatActivity implements ArtistsFragment.C
         );
     }
 
-    public void refreshArtistsRanking(View view) {
-        int actualArtistsRankingNumber = getPreferredArtistsRankingNumber();
-        String actualArtistsRankingGenre = getPreferredArtistsRankingGenre();
+    public boolean getPreferredArtistsRankingOptionsChanged() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
+        int rankSettingsChanged =  sharedPreferences.getInt(
+                getString(R.string.pref_artists_rank_settings_changed_key),
+                Integer.parseInt(getString(R.string.pref_artists_rank_settings_changed_default))
+        );
 
+        return rankSettingsChanged == 1;
+    }
+
+    public void refreshArtistsRanking(View view) {
         ArtistsFragment artistsFragment = (ArtistsFragment)
                 getSupportFragmentManager().findFragmentById(R.id.content_fragment_artists);
         if (artistsFragment != null) {
-            artistsFragment.onRefreshNecessary(actualArtistsRankingNumber,
-                    actualArtistsRankingGenre, isOnline());
+            artistsFragment.onRefreshNecessary(artistsRankingNumber,
+                    artistsRankingGenre, isOnline());
         }
     }
 
@@ -177,11 +194,8 @@ public class MainActivity extends AppCompatActivity implements ArtistsFragment.C
     }
 
     private boolean isNecessaryRefreshRanking() throws ParseException {
-        int actualArtistsRankingNumber = getPreferredArtistsRankingNumber();
-        String actualArtistsRankingGenre = getPreferredArtistsRankingGenre();
 
-        return actualArtistsRankingNumber != artistsRankingNumber
-                || !actualArtistsRankingGenre.equals(artistsRankingGenre) || artistsRankIsExpired();
+        return rankSettingsChanged || artistsRankIsExpired();
     }
 
     private void runFloatingActionButtonAction(View view) throws ParseException {
@@ -219,5 +233,14 @@ public class MainActivity extends AppCompatActivity implements ArtistsFragment.C
         DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd", Locale.ENGLISH);
 
         return dateFormat.format(calendar.getTime());
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+        if (!key.equals(getString(R.string.pref_artists_rank_settings_changed_key))) {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putInt(getString(R.string.pref_artists_rank_settings_changed_key), 1);
+            editor.commit();
+        }
     }
 }

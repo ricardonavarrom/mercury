@@ -72,6 +72,7 @@ public class ArtistsPresenterImp implements ArtistsPresenter, LoadArtistsInterac
     @Override
     public void onArtistsLoaded(List<Artist> artists) {
         refreshArtistsRankingExpirationDate();
+        view.resetPreferredArtistsRankingOptionsChanged();
         view.hideLoading();
         view.showRecyclerView();
         view.hideRefreshRankingView();
@@ -83,6 +84,7 @@ public class ArtistsPresenterImp implements ArtistsPresenter, LoadArtistsInterac
     @Override
     public void onArtistsRefreshed(List<Artist> artists) {
         refreshArtistsRankingExpirationDate();
+        view.resetPreferredArtistsRankingOptionsChanged();
         view.hideLoading();
         view.hideRefreshRankingView();
         view.showRecyclerView();

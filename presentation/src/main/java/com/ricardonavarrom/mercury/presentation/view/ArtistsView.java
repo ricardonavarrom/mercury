@@ -15,4 +15,5 @@ import me.panavtec.threaddecoratedview.views.qualifiers.ThreadDecoratedView;
     void showLoadArtistsError();
     void showNetworkError();
     void saveArtistsRankingExpirationDate(String artistRankingExpirationDateString);
+    void resetPreferredArtistsRankingOptionsChanged();
 }

@@ -22,6 +22,8 @@
     <string name="pref_artists_rank_genre_default_name">todos los géneros</string>
 
     <string name="pref_artists_rank_expiration_date_key" translatable="false">artistRankingExpirationDate</string>
+    <string name="pref_artists_rank_settings_changed_key" translatable="false">rankSettingsChanged</string>
+    <string name="pref_artists_rank_settings_changed_default" translatable="false">0</string>
 
     <string name="item_artists_image_width" translatable="false">150</string>
     <string name="item_artists_image_height" translatable="false">150</string>
