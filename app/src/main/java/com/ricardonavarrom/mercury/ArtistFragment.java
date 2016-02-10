@@ -70,14 +70,6 @@ public class ArtistFragment extends Fragment implements ArtistView {
         rankView.setText(Integer.toString(rank));
     }
 
-    @Override public void showRankGenre(String rankGenre) {
-        rankView.setText(rankGenre);
-    }
-
-    @Override public void showRankDate(String rankDate) {
-        rankView.setText(rankDate);
-    }
-
     @Override public void showName(String name) {
         nameView.setText(name);
     }

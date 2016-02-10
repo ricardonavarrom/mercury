@@ -3,11 +3,13 @@
     <string name="action_settings">Preferencias</string>
     <string name="action_share">Compartir</string>
     <string name="action_refresh_artists_ranking">Refrescar el ranking</string>
+    <string name="action_about">Acerca de...</string>
     <string name="error_load_artists">Error cargando artistas</string>
     <string name="error_pref_artists_rank_number">Valor fuera de rango (1-50)</string>
     <string name="error_network">Es necesario conexión a red</string>
     <string name="title_activity_artist">Detalle del artista</string>
     <string name="title_activity_settings">Preferencias</string>
+    <string name="title_activity_about">Acerca de...</string>
 
     <string name="pref_artists_rank_number_key" translatable="false">artistsRankingNumber</string>
     <string name="pref_artists_rank_number_label">Número de artistas del ranking (1-50)</string>
@@ -39,4 +41,10 @@
     <string name="selected_genre">Género</string>
     <string name="artist_genres">Géneros</string>
     <string name="last_update_date">Actualizado</string>
+
+    <string name="about_version" translatable="false">v.1.1.0</string>
+    <string name="about_developed_by" translatable="false">desarrollado por</string>
+    <string name="about_developer" translatable="false">\@ricardonavarrom</string>
+    <string name="about_github_url" translatable="false">https://github.com/ricardonavarrom</string>
+    <string name="about_twitter_url" translatable="false">https://twitter.com/ricardonavarrom</string>
 </resources>
