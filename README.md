@@ -36,7 +36,7 @@ mercury (DOCUMENTACIÓN EN CONSTRUCCIÓN)
 <img src="https://github.com/ricardonavarrom/mercury/blob/master/doc/screenshot6.png" width="400px" />
 
 ## Vídeo demo
-<iframe width="420" height="315" src="https://www.youtube.com/embed/hhVmuRycZME" frameborder="0" allowfullscreen></iframe>
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=hhVmuRycZME" target="_blank"><img src="http://img.youtube.com/vi/hhVmuRycZME/0.jpg" alt="mercury" width="480" height="360" border="10" /></a>
 
 ### Autor
 
