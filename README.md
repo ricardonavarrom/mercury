@@ -29,6 +29,11 @@ mercury (DOCUMENTACIÓN EN CONSTRUCCIÓN)
 
 ## Algunos screenshot
 <img src="https://github.com/ricardonavarrom/mercury/blob/master/doc/screenshot1.png" width="250px" />
+<img src="https://github.com/ricardonavarrom/mercury/blob/master/doc/screenshot2.png" width="250px" />
+<img src="https://github.com/ricardonavarrom/mercury/blob/master/doc/screenshot3.png" width="250px" />
+<img src="https://github.com/ricardonavarrom/mercury/blob/master/doc/screenshot4.png" width="250px" />
+<img src="https://github.com/ricardonavarrom/mercury/blob/master/doc/screenshot5.png" width="250px" />
+<img src="https://github.com/ricardonavarrom/mercury/blob/master/doc/screenshot6.png" width="250px" />
 
 ### Autor
 
