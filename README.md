@@ -34,16 +34,15 @@ mercury
 - <a href="http://square.github.io/picasso" target="_blank">Picasso</a>: permite cargar y tratar imágenes de la red en una app Android.
 - <a href="https://github.com/PaNaVTEC/ViewThreadDecorator" target="_blank">ViewThreadDecorator</a>: facilita la decoración de vistas y soluciona problemas con el threading en la implementación del MV*.
 
-## ¿De donde puedo sacar el APK para instalarlo en mi dispositivo?
-- Para obtener el apk de la app basta con hacer click en el siguiente icono.
-<a href="https://github.com/ricardonavarrom/mercury/blob/master/mercury.apk?raw=true"><img src="https://github.com/ricardonavarrom/mercury/blob/master/doc/download.png" alt="download mercury" width="100px" height="100px"/></a>
-
 ## ¿Cómo puedo instalar el proyecto en mi equipo?
 - Clonar el proyecto en el equipo.
 - Obtener una API key de <a href="https://developer.echonest.com/account/register" target="_blank">Echo Nest API</a>.
 - Dirigirse al módulo app y en el fichero build.gradle añadir la API key obtenida en el parámetro ECHONEST_API_KEY.
 - Sincronizar los cambios con Graddle.
 - Lanzar la aplicación.
+
+## Descarga del apk
+<a href="https://github.com/ricardonavarrom/mercury/blob/master/mercury.apk?raw=true"><img src="https://github.com/ricardonavarrom/mercury/blob/master/doc/download.png" alt="download mercury" width="100px" height="100px"/></a>
 
 ## Algunos screenshot
 <img src="https://github.com/ricardonavarrom/mercury/blob/master/doc/screenshot1.png" width="200px" />
