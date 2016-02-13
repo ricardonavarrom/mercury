@@ -14,10 +14,18 @@ mercury (DOCUMENTACIÓN EN CONSTRUCCIÓN)
 - Por último, citar que se ha añadido una screen denominada "Acerca de..." con un poco información del desarrollador de la aplicación y con sus respectivos enlaces a GitHub y Twitter (en caso de tener instalada la app de Twitter se abrirá el link en la misma).
 
 ## ¿De dónde sacamos la información?
-- La información 
+- <a href="http://developer.echonest.com/docs" target="_blank">Echo Nest API</a>: mediante esta API obtenemos la clasificación de los artistas en el ranking y el identificador del artista en la API de Spotify (mediante el proyecto roseta). Echo Nest API require registro y obtención de credenciales para su uso.
+- <a href="https://developer.spotify.com/web-api" target="_blank">Spotify Web API</a>: con los identificadores obtenidos de Echo Nest API, solicitamos nombre, imágenes, géneros, URI y URL del artista a Spotify Web API. Para las llamadas utilizadas no es necesario registro. 
 
-## Clean architecture 
-- No
+
+## Clean Architecture 
+- Para intentar que nuestra app sea lo más eficiente, robusta y escalables posible hemos intentado implementar una Clear Architecture en Android. No vamos a entrar a explicar en que consiste este tipo de arquitectura ya que existen infinidad de vídeos y conferencias de profesionales en la red.
+
+<img src="https://github.com/ricardonavarrom/mercury/blob/master/doc/cleanArchitecture.png" width="647px" />
+
+- A continuación mostramos las dependencias establecidas entre los módulos de nuestra app.
+
+<img src="https://github.com/ricardonavarrom/mercury/blob/master/doc/myCleanArchitecture.png" width="500px" />
 
 ## ¿Qué librerías hemos utilizado?
 - <a href="http://square.github.io/retrofit" target="_blank">Retrofit</a>: cliente REST para Android y Java, desarrollada por Square. Permite hacer peticiones y gestionar diferentes tipos de parámetros y parsear automáticamente la respuesta a un POJO.
@@ -27,7 +35,7 @@ mercury (DOCUMENTACIÓN EN CONSTRUCCIÓN)
 - <a href="https://github.com/PaNaVTEC/ViewThreadDecorator" target="_blank">ViewThreadDecorator</a>: facilita la decoración de vistas y soluciona problemas con el threading en la implementación del MV*.
 
 ## ¿De donde puedo sacar el APK para instalarlo en mi dispositivo?
-- Para descargar el apk hacer click aquí <a href="https://github.com/ricardonavarrom/mercury/blob/master/mercury.apk?raw=true"><img src="https://github.com/ricardonavarrom/mercury/blob/master/doc/download.png" alt="download mercury" width="100px" height="100px"/></a>
+<a href="https://github.com/ricardonavarrom/mercury/blob/master/mercury.apk?raw=true"><img src="https://github.com/ricardonavarrom/mercury/blob/master/doc/download.png" alt="download mercury" width="100px" height="100px"/></a>
 
 ## ¿Cómo puedo instalar el proyecto en mi equipo?
 - Clonar el proyecto en el equipo.
