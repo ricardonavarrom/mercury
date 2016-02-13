@@ -27,7 +27,7 @@ mercury (DOCUMENTACIÓN EN CONSTRUCCIÓN)
 - <a href="https://github.com/PaNaVTEC/ViewThreadDecorator" target="_blank">ViewThreadDecorator</a>: facilita la decoración de vistas y soluciona problemas con el threading en la implementación del MV*.
 
 ## ¿De donde puedo sacar el APK para instalarlo en mi dispositivo?
-<a href="https://github.com/ricardonavarrom/mercury/blob/master/mercury.apk?raw=true" target="_blank"><img src="https://github.com/ricardonavarrom/mercury/blob/master/doc/screenshot1.png" alt="download mercury" width="50" height="360px"/></a>
+- Para descargar el apk hacer click aquí <a href="https://github.com/ricardonavarrom/mercury/blob/master/mercury.apk?raw=true"><img src="https://github.com/ricardonavarrom/mercury/blob/master/doc/download.png" alt="download mercury" width="100px" height="100px"/></a>
 
 ## ¿Cómo puedo instalar el proyecto en mi equipo?
 - Clonar el proyecto en el equipo.
